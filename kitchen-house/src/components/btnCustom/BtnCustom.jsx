@@ -6,7 +6,7 @@ const BtnCustom = ({ children }) => {
         relative overflow-hidden
         ">
             <span className="z-10 relative">{children}</span>
-            <div className="absolute top-0 group-hover:left-60 left-0 duration-500 w-full h-full bg-primaryColor "></div>
+            <div className="absolute -top-1 group-hover:left-80 -left-1  duration-500 w-[25rem] h-[5rem] bg-primaryColor "></div>
         </button>
     );
 };
