@@ -26,7 +26,7 @@ const NavBar = () => {
 
     const menus = (
         <>
-            <li className="border-y-[.01rem] border-white/10 py-5">
+            <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/"
                     className={({ isActive, isPending }) =>
@@ -34,12 +34,12 @@ const NavBar = () => {
                             ? 'pending'
                             : isActive
                             ? 'active'
-                            : 'hover:active pl-7 py-3'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
                     Home
                 </NavLink>
             </li>
-            <li className="border-y-[.01rem] border-white/10 py-5">
+            <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/food"
                     className={({ isActive, isPending }) =>
@@ -47,12 +47,12 @@ const NavBar = () => {
                             ? 'pending'
                             : isActive
                             ? 'active'
-                            : 'hover:active pl-7 py-3'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
                     Food
                 </NavLink>
             </li>
-            <li className="border-y-[.01rem] border-white/10 py-5">
+            <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/blog"
                     className={({ isActive, isPending }) =>
@@ -60,12 +60,12 @@ const NavBar = () => {
                             ? 'pending'
                             : isActive
                             ? 'active'
-                            : 'hover:active pl-7 py-3'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
                     Blog
                 </NavLink>
             </li>
-            <li className="border-y-[.01rem] border-white/10 py-5">
+            <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/contact"
                     className={({ isActive, isPending }) =>
@@ -73,12 +73,12 @@ const NavBar = () => {
                             ? 'pending'
                             : isActive
                             ? 'active'
-                            : 'hover:active pl-7 py-3'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
                     Contact
                 </NavLink>
             </li>
-            <li className="border-y-[.01rem] border-white/10 py-5">
+            <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/about-us"
                     className={({ isActive, isPending }) =>
@@ -86,7 +86,7 @@ const NavBar = () => {
                             ? 'pending'
                             : isActive
                             ? 'active'
-                            : 'hover:active pl-7 my-3'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
                     About Us
                 </NavLink>
