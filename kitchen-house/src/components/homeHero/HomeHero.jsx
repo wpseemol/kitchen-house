@@ -40,17 +40,17 @@ export default function HomeHero() {
 
     return (
         <>
-            {/*<!-- Component: Card Carousel --> */}
+            {/* Component: Card Carousel */}
             <div
                 className="glide-06 relative w-full overflow-hidden rounded 
              lg:h-[48rem]  
             ">
-                {/*    <!-- Slides --> */}
+                {/*     Slides */}
                 <div className="overflow-hidden" data-glide-el="track">
                     <ul className="whitespace-no-wrap flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-0">
                         <li className="relative">
                             <img
-                                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-05.jpg"
+                                src="https://i.ibb.co/4sHdX29/Enswell-Interior-by-J-Varney-2200x1237px.jpg"
                                 className="w-full h-full object-cover object-center"
                             />
                             {/* slider information  */}
@@ -82,72 +82,7 @@ export default function HomeHero() {
                         </li>
                         <li className="relative">
                             <img
-                                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-01.jpg"
-                                className="w-full h-full object-cover object-center"
-                            />
-
-                            {/* slider information  */}
-                            <div className="absolute top-0 left-0 w-full z-[2] ">
-                                <div className="lg:my-[16.5rem] md:my-[13rem] sm:my-[6rem] text-center    flex flex-col items-center justify-center text-white">
-                                    <div>
-                                        <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
-                                            {' '}
-                                            Best Ever Food{' '}
-                                        </h2>
-                                    </div>
-                                    <div data-aos="fade-up">
-                                        <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
-                                            <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
-                                            </p>
-                                        </div>
-                                        <div className="w-fit mx-auto">
-                                            <BtnCustom>
-                                                Make Reservation
-                                            </BtnCustom>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="absolute top-0 left-0 bg-black/40 w-full h-full z-[1]"></div>
-                        </li>
-                        <li className="relative">
-                            <img
-                                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-02.jpg"
-                                className="w-full h-full object-cover object-center"
-                            />
-                            {/* slider information  */}
-                            <div className="absolute top-0 left-0 w-full z-[2] ">
-                                <div className="lg:my-[16.5rem] md:my-[13rem] sm:my-[6rem] text-center    flex flex-col items-center justify-center text-white">
-                                    <div>
-                                        <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
-                                            {' '}
-                                            Best Ever Food{' '}
-                                        </h2>
-                                    </div>
-                                    <div data-aos="fade-up">
-                                        <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
-                                            <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
-                                            </p>
-                                        </div>
-                                        <div className="w-fit mx-auto">
-                                            <BtnCustom>
-                                                Make Reservation
-                                            </BtnCustom>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="absolute top-0 left-0 bg-black/40 w-full h-full z-[1]"></div>
-                        </li>
-                        <li className="relative">
-                            <img
-                                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-03.jpg"
+                                src="https://i.ibb.co/JqZSfW8/pexels-min-an-1482803.jpg"
                                 className="w-full h-full object-cover object-center"
                             />
 
@@ -180,7 +115,72 @@ export default function HomeHero() {
                         </li>
                         <li className="relative">
                             <img
-                                src="https://Tailwindmix.b-cdn.net/carousel/carousel-image-04.jpg"
+                                src="https://i.ibb.co/BLg914h/pexels-engin-akyurt-2673353.jpg"
+                                className="w-full h-full object-cover object-center"
+                            />
+                            {/* slider information  */}
+                            <div className="absolute top-0 left-0 w-full z-[2] ">
+                                <div className="lg:my-[16.5rem] md:my-[13rem] sm:my-[6rem] text-center    flex flex-col items-center justify-center text-white">
+                                    <div>
+                                        <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
+                                            {' '}
+                                            Best Ever Food{' '}
+                                        </h2>
+                                    </div>
+                                    <div data-aos="fade-up">
+                                        <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
+                                            <p>
+                                                Lorem ipsum dolor sit amet
+                                                consectetur adipisicing elit.
+                                                Architecto, asperiores.
+                                            </p>
+                                        </div>
+                                        <div className="w-fit mx-auto">
+                                            <BtnCustom>
+                                                Make Reservation
+                                            </BtnCustom>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="absolute top-0 left-0 bg-black/40 w-full h-full z-[1]"></div>
+                        </li>
+                        <li className="relative">
+                            <img
+                                src="https://i.ibb.co/svmGRn4/pexels-jonathan-borba-2983101.jpg"
+                                className="w-full h-full object-cover object-center"
+                            />
+
+                            {/* slider information  */}
+                            <div className="absolute top-0 left-0 w-full z-[2] ">
+                                <div className="lg:my-[16.5rem] md:my-[13rem] sm:my-[6rem] text-center    flex flex-col items-center justify-center text-white">
+                                    <div>
+                                        <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
+                                            {' '}
+                                            Best Ever Food{' '}
+                                        </h2>
+                                    </div>
+                                    <div data-aos="fade-up">
+                                        <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
+                                            <p>
+                                                Lorem ipsum dolor sit amet
+                                                consectetur adipisicing elit.
+                                                Architecto, asperiores.
+                                            </p>
+                                        </div>
+                                        <div className="w-fit mx-auto">
+                                            <BtnCustom>
+                                                Make Reservation
+                                            </BtnCustom>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="absolute top-0 left-0 bg-black/40 w-full h-full z-[1]"></div>
+                        </li>
+                        <li className="relative">
+                            <img
+                                src="https://i.ibb.co/j48ccvC/pexels-engin-akyurt-2347311.jpg"
                                 className="w-full h-full object-cover object-center"
                             />
                             {/* slider information  */}
@@ -212,7 +212,7 @@ export default function HomeHero() {
                         </li>
                     </ul>
                 </div>
-                {/*    <!-- Controls --> */}
+                {/*     Controls */}
                 <div
                     className="absolute left-0 top-1/2 md:flex h-0 w-full items-center justify-between px-4 hidden"
                     data-glide-el="controls">
@@ -255,7 +255,7 @@ export default function HomeHero() {
                         </svg>
                     </button>
                 </div>
-                {/*    <!-- Indicators --> */}
+                {/*     Indicators */}
 
                 <div className="absolute bottom-0 left-0 w-full  z-[2] overflow-hidden">
                     <div className="lg:w-full w-[80rem]">
@@ -268,7 +268,7 @@ export default function HomeHero() {
                     <div className="w-full h-4 bg-white"></div>
                 </div>
             </div>
-            {/*<!-- End Card Carousel --> */}
+            {/* End Card Carousel */}
         </>
     );
 }
