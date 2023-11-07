@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 import { CgLogIn } from 'react-icons/cg';
 import { FiMenu } from 'react-icons/fi';
@@ -174,10 +174,12 @@ const NavBar = () => {
                     </div>
                     <div
                         style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
-                        className="p-3 rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
-                        <div className="text-2xl font-extrabold">
-                            <CgLogIn />
-                        </div>
+                        className=" rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
+                        <Link to="/login" className="">
+                            <div className="text-2xl font-extrabold p-3">
+                                <CgLogIn />
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </nav>
