@@ -5,10 +5,10 @@ const HomeProductItems = () => {
         const slider = new Glide('.glide-04', {
             type: 'carousel',
             focusAt: 'center',
-            perView: 4,
+            perView: 5,
             autoplay: 3500,
             animationDuration: 700,
-            gap: 10,
+            gap: 20,
             classNames: {
                 nav: {
                     active: '[&>*]:bg-wuiSlate-700',

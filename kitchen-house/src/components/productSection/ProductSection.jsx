@@ -5,14 +5,14 @@ import HomeProductItems from '../homeProductItems/HomeProductItems';
 const ProductSection = () => {
     return (
         <>
-            <div className="  relative z-[1] h-[52rem] w-full -mt-10">
+            <div className="  relative z-[1] h-[52rem] w-full -mt-10 ">
                 <figure className="absolute top-0 left-0 z-[3]">
                     <img
                         src="https://i.ibb.co/SRncHs1/shape-5.png"
                         alt="desigine"
                     />
                 </figure>
-                <figure className="absolute bottom-0 right-0 z-[3]">
+                <figure className="absolute bottom-28 right-10 z-[3]">
                     <img
                         src="https://i.ibb.co/KNmBtNN/shape-7.png"
                         alt="desigine"

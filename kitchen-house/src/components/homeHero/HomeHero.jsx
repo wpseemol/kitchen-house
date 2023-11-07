@@ -7,7 +7,7 @@ import 'aos/dist/aos.css';
 export default function HomeHero() {
     useEffect(() => {
         AOS.init({
-            // Global settings
+            duration: 2000,
         });
     }, []);
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function HomeHero() {
             {/* Component: Card Carousel */}
             <div
                 className="glide-06 relative w-full overflow-hidden rounded 
-             lg:h-[48rem]  
+             lg:h-[48rem] 
             ">
                 {/*     Slides */}
                 <div className="overflow-hidden" data-glide-el="track">
@@ -257,7 +257,7 @@ export default function HomeHero() {
                 </div>
                 {/*     Indicators */}
 
-                <div className="absolute bottom-0 left-0 w-full  z-[2] overflow-hidden">
+                <div className="absolute bottom-0 left-0 w-full  z-[2] overflow-hidden -mb-1">
                     <div className="lg:w-full w-[80rem]">
                         <img
                             src="https://i.ibb.co/cJXxX6s/shape-1.png"

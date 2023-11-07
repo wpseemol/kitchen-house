@@ -4,9 +4,9 @@ import BtnCustom from '../btnCustom/BtnCustom';
 const StoryInfo = () => {
     return (
         <>
-            <div className="container mx-auto md:mt-20 md:px-0 px-2">
-                <div className="flex gap-2 justify-center">
-                    <div className="md:w-1/2 mt-20">
+            <div className="container mx-auto  md:px-0 px-2 overflow-hidden">
+                <div className="flex gap-2 justify-center items-center">
+                    <div className="md:w-1/2  lg:my-0 my-16">
                         <div>
                             <h3 className="font-iconFont text-3xl">
                                 Our Story
@@ -42,7 +42,7 @@ const StoryInfo = () => {
                             <BtnCustom>Our Story</BtnCustom>
                         </div>
                     </div>
-                    <div className="relative mt-12 md:block hidden">
+                    <div className="relative mt-[12rem] md:block hidden">
                         <figure className="absolute top-56 left-0 z-[1]">
                             <img
                                 src="https://i.ibb.co/wrZvxQw/vector-1.png"
@@ -56,7 +56,7 @@ const StoryInfo = () => {
                             />
                         </figure>
 
-                        <figure className="relative">
+                        <figure className="relative" data-aos="fade-up">
                             <img
                                 src="https://i.ibb.co/NCqWrm8/about-1.png"
                                 alt="Shap Image"
