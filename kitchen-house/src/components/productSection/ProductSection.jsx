@@ -1,11 +1,12 @@
 import AnimesonBg from '../animesonBg/AnimesonBg';
 import videoUrl from '../../assets/videos/homeProductSectonvideo.mp4';
 import HomeProductItems from '../homeProductItems/HomeProductItems';
+import BtnCustom from '../btnCustom/BtnCustom';
 
 const ProductSection = () => {
     return (
         <>
-            <div className="  relative z-[1] h-[52rem] w-full -mt-10 ">
+            <div className="  relative z-[1] w-full -mt-10 my-16 ">
                 {/* bg deseigine start  */}
                 <figure className="absolute top-0 left-0 z-[3]">
                     <img
@@ -44,12 +45,16 @@ const ProductSection = () => {
                         </div>
                         <div>
                             <h2 className="text-5xl font-bold my-5">
-                                Our All Delicious & Tasty Product
+                                Our Top Selling Product
                             </h2>
                         </div>
                     </div>
                     <div className="container mx-auto">
                         <HomeProductItems />
+
+                        <div className="py-8 pb-12 mx-auto w-fit">
+                            <BtnCustom>All Product</BtnCustom>
+                        </div>
                     </div>
                 </div>
                 {/* product section */}

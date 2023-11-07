@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Glide from '@glidejs/glide';
+import Rating from '../rating/Rating';
 const HomeProductItems = () => {
     useEffect(() => {
         const slider = new Glide('.glide-04', {
@@ -7,8 +8,9 @@ const HomeProductItems = () => {
             focusAt: 'center',
             perView: 5,
             autoplay: 3500,
+
             animationDuration: 700,
-            gap: 20,
+            gap: 5,
             classNames: {
                 nav: {
                     active: '[&>*]:bg-wuiSlate-700',
@@ -16,7 +18,7 @@ const HomeProductItems = () => {
             },
             breakpoints: {
                 1024: {
-                    perView: 2,
+                    perView: 3,
                 },
                 640: {
                     perView: 1,
@@ -45,27 +47,8 @@ const HomeProductItems = () => {
                                         className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
                                     />
                                 </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
                                 </div>
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
@@ -89,27 +72,8 @@ const HomeProductItems = () => {
                                         className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
                                     />
                                 </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
                                 </div>
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
@@ -133,6 +97,9 @@ const HomeProductItems = () => {
                                         className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
                                     />
                                 </div>
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
+                                </div>
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
                                         <h2 className="text-3xl font-semibold ">
@@ -154,6 +121,59 @@ const HomeProductItems = () => {
                                         alt=""
                                         className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
                                     />
+                                </div>
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
+                                </div>
+                                <div className="flex flex-col justify-between p-6 space-y-8">
+                                    <div className="space-y-2">
+                                        <h2 className="text-3xl font-semibold ">
+                                            Donec lectus leo
+                                        </h2>
+                                        <p>
+                                            <span>$</span>
+                                            15.00
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
+                                <div className="h-72">
+                                    <img
+                                        src="https://source.unsplash.com/random/300x300/?2"
+                                        alt=""
+                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
+                                    />
+                                </div>
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
+                                </div>
+                                <div className="flex flex-col justify-between p-6 space-y-8">
+                                    <div className="space-y-2">
+                                        <h2 className="text-3xl font-semibold ">
+                                            Donec lectus leo
+                                        </h2>
+                                        <p>
+                                            <span>$</span>
+                                            15.00
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
+                                <div className="h-72">
+                                    <img
+                                        src="https://source.unsplash.com/random/300x300/?2"
+                                        alt=""
+                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
+                                    />
+                                </div>
+                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
+                                    <Rating />
                                 </div>
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
