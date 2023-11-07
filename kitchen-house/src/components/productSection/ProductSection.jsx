@@ -6,6 +6,7 @@ const ProductSection = () => {
     return (
         <>
             <div className="  relative z-[1] h-[52rem] w-full -mt-10 ">
+                {/* bg deseigine start  */}
                 <figure className="absolute top-0 left-0 z-[3]">
                     <img
                         src="https://i.ibb.co/SRncHs1/shape-5.png"
@@ -32,7 +33,8 @@ const ProductSection = () => {
                     </video>
                 </div>
                 <div className="absolute top-0 left-0 w-full h-full bg-black/90 z-[2]"></div>
-
+                {/* bg deseigine end  */}
+                {/* product section */}
                 <div className="relative z-[4] pt-16">
                     <div className="text-center text-white">
                         <div className="">
@@ -50,6 +52,7 @@ const ProductSection = () => {
                         <HomeProductItems />
                     </div>
                 </div>
+                {/* product section */}
             </div>
         </>
     );
