@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import HomeHero from '../../components/homeHero/HomeHero';
 import PreOrder from '../../components/preOrder/PreOrder';
 import ProductSection from '../../components/productSection/ProductSection';
@@ -6,6 +7,10 @@ import StoryInfo from '../../components/storyInfo/StoryInfo';
 const HomePage = () => {
     return (
         <>
+            <Helmet>
+                <title>Kitchen House || Home</title>
+            </Helmet>
+
             {/* home hero section */}
             <section>
                 <HomeHero />

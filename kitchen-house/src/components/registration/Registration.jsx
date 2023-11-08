@@ -1,8 +1,57 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BtnCustom from '../btnCustom/BtnCustom';
 import regBgImage from '../../assets/videos/regBgimage.mp4';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Registration = () => {
+    const [profilePicPrevew, setProfilePicPrevew] = useState(
+        'https://i.ibb.co/wBfQjTy/user-Image.png'
+    );
+    const hendelProfilePicPrevew = (e) => {
+        if (e.target.value) {
+            setProfilePicPrevew(e.target.value);
+        } else {
+            setProfilePicPrevew('https://i.ibb.co/wBfQjTy/user-Image.png');
+        }
+    };
+
+    const loginRegInfo = useContext(AuthContext);
+    const { singUp, user } = loginRegInfo || {};
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handalRegSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const userName = form.userName.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        singUp(email, password)
+            .then(() => {
+                // Signed up Successful
+
+                // Swal.fire({
+                //     title: 'Successful!',
+                //     text: 'Signed up Successful',
+                //     icon: 'success',
+                //     confirmButtonText: 'Okay',
+                // });
+                location?.state ? navigate(location?.state) : navigate('/');
+                form.reset();
+            })
+            .catch((error) => {
+                // Swal.fire({
+                //     title: 'Error!',
+                //     text: error,
+                //     icon: 'error',
+                //     confirmButtonText: 'Okay',
+                // });
+            });
+    };
     return (
         <div className=" grid lg:grid-cols-4 grid-cols-1">
             <div className="lg:col-span-1 lg:block hidden relative">
@@ -27,7 +76,9 @@ const Registration = () => {
                     </div>
 
                     <div className=" sm:w-[30rem]">
-                        <form className="flex flex-col gap-4 w-full">
+                        <form
+                            onSubmit={handalRegSubmit}
+                            className="flex flex-col gap-4 w-full">
                             <div className="flex items-center gap-3">
                                 <div>
                                     <label
@@ -58,6 +109,27 @@ const Registration = () => {
                                     />
                                 </div>
                             </div>
+                            <div className="relative group">
+                                <label
+                                    className="text- text-black font-medium mr-auto"
+                                    htmlFor="pictureUrl">
+                                    Profile Picture
+                                </label>
+                                <br />
+                                <input
+                                    onChange={hendelProfilePicPrevew}
+                                    type="text"
+                                    name="pictureUrl"
+                                    id="pictureUrl"
+                                    className="border border-black/50 w-full p-2 rounded-md"
+                                />
+                                <figure className="absolute group-hover:scale-100 scale-0 top-2 right-2 w-14 h-14 z-10 duration-150">
+                                    <img
+                                        src={profilePicPrevew}
+                                        alt="Profile Pic Prevew"
+                                    />
+                                </figure>
+                            </div>
                             <div>
                                 <label
                                     className="text- text-black font-medium mr-auto"
@@ -82,7 +154,7 @@ const Registration = () => {
                                 <br />
                                 <input
                                     type="password"
-                                    name=""
+                                    name="password"
                                     id=""
                                     placeholder="6+ characters"
                                     className="border border-black/50 w-full p-2 rounded-md"
@@ -94,6 +166,7 @@ const Registration = () => {
                                     type="checkbox"
                                     name="agreeWith"
                                     className="mr-1"
+                                    required
                                 />
                                 <label htmlFor="agreeWith">
                                     I agree with{` Dribbble's `}

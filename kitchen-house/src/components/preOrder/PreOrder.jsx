@@ -120,10 +120,11 @@ const PreOrder = () => {
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
+                                    defaultValue="option1"
                                     className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
                                     name="occasion"
                                     id="preferred-food">
-                                    <option value="option1" selected>
+                                    <option value="option1">
                                         Preferred food
                                     </option>
                                     <option value="option2">Option 2</option>
@@ -132,10 +133,11 @@ const PreOrder = () => {
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
+                                    defaultValue="option1"
                                     className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
                                     name="occasion"
                                     id="occasion">
-                                    <option value="option1" selected>
+                                    <option value="option1">
                                         Number of persons
                                     </option>
                                     <option value="option2">Option 2</option>
@@ -144,10 +146,11 @@ const PreOrder = () => {
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
+                                    defaultValue="option1"
                                     className="border-b border-[#e5e5e5] w-full text-[#797979] focus:outline-none pb-3"
                                     name="occasion"
                                     id="occasion">
-                                    <option value="option1" selected>
+                                    <option value="option1">
                                         Booking type
                                     </option>
                                     <option value="option2">Option 2</option>
