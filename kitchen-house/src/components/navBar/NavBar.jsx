@@ -4,9 +4,14 @@ import { CgLogIn } from 'react-icons/cg';
 import { FiMenu } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import useWindowPosition from '../../hooks/useWindowPosition/usewindowPosition';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+import UserInfo from '../userInfo/UserInfo';
 
 const NavBar = () => {
+    const loginRegInfo = useContext(AuthContext);
+    const { user, logOut } = loginRegInfo || {};
+
     const windowPosition = useWindowPosition();
     const [showMenuBar, setShowMenuBar] = useState(false);
 
@@ -164,23 +169,43 @@ const NavBar = () => {
                 </div>
                 {/* manu icon  */}
 
-                <div className="sm:flex hidden items-center gap-5">
+                <div className="flex items-center gap-5">
                     <div
                         style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
-                        className="p-3 rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
+                        className="sm:block hidden p-3 rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
                         <div className="text-2xl">
                             <GoSearch />
                         </div>
                     </div>
-                    <div
-                        style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
-                        className=" rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
-                        <Link to="/login" className="">
-                            <div className="text-2xl font-extrabold p-3">
-                                <CgLogIn />
-                            </div>
-                        </Link>
-                    </div>
+
+                    {user ? (
+                        <div
+                            style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
+                            className=" rounded-full hover:bg-primaryColor hover:text-white duration-200 relative group">
+                            <figure className="w-12 h-12 rounded-full overflow-hidden">
+                                <img
+                                    src={
+                                        user?.photoURL
+                                            ? user?.photoURL
+                                            : 'https://i.ibb.co/wBfQjTy/user-Image.png'
+                                    }
+                                    alt="Profile Picture"
+                                />
+                            </figure>
+
+                            <UserInfo user={user} logOut={logOut} />
+                        </div>
+                    ) : (
+                        <div
+                            style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
+                            className=" rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
+                            <Link to="/login" className="">
+                                <div className="text-2xl font-extrabold p-3">
+                                    <CgLogIn />
+                                </div>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </nav>
         </section>

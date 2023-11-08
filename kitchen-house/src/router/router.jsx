@@ -4,6 +4,7 @@ import HomePage from '../pages/home/HomePage';
 import Root from '../root/Root';
 import Login from '../pages/login/Login';
 import Registration from '../components/registration/Registration';
+import UploadItem from '../pages/uploadItem/UploadItem';
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: '/registration',
                 element: <Registration />,
+            },
+            {
+                path: '/upload-item',
+                element: <UploadItem />,
             },
         ],
     },

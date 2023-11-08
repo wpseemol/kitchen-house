@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const logInGoogle = () => {
-        signInWithPopup(auth, googleProvider);
+        return signInWithPopup(auth, googleProvider);
     };
 
     //login chake

@@ -1,8 +1,70 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgLogVideo from '../../assets/videos/loginVideobg.mp4';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+    const loginRegInfo = useContext(AuthContext);
+    const { singIn, logInGoogle } = loginRegInfo || {};
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handelLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        // const fName = form.fName.value;
+        // const lName = form.lName.value;
+        // const pictureUrl = form.pictureUrl.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        singIn(email, password)
+            .then(() => {
+                Swal.fire({
+                    title: 'Successful',
+                    text: 'Log in Successful',
+                    icon: 'success',
+                    confirmButtonText: 'Okay',
+                });
+
+                location?.state ? navigate(location?.state) : navigate('/');
+                form.reset();
+            })
+            .catch((error) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error,
+                    icon: 'error',
+                    confirmButtonText: 'Okay',
+                });
+            });
+    };
+
+    const handelGoogleLogin = () => {
+        logInGoogle()
+            .then(() => {
+                Swal.fire({
+                    title: 'Successful',
+                    text: 'Log in Successful',
+                    icon: 'success',
+                    confirmButtonText: 'Okay',
+                });
+
+                location?.state ? navigate(location?.state) : navigate('/');
+            })
+            .catch((error) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error,
+                    icon: 'error',
+                    confirmButtonText: 'Okay',
+                });
+            });
+    };
+
     return (
         <div className=" grid lg:grid-cols-4 grid-cols-1">
             <div className="lg:col-span-1 lg:block hidden relative">
@@ -26,7 +88,9 @@ const Login = () => {
                         </h2>
                     </div>
                     <div>
-                        <div className="flex justify-center gap-5 w-full py-3 rounded-full border border-black/30 hover:bg-primaryColor/30 duration-200">
+                        <div
+                            onClick={handelGoogleLogin}
+                            className="flex justify-center gap-5 w-full py-3 rounded-full border border-black/30 hover:bg-primaryColor/30 duration-200">
                             <figure>
                                 <img
                                     src="https://i.ibb.co/QN1hrN9/icons8-google-24.png"
@@ -44,7 +108,9 @@ const Login = () => {
                         <div className="w-[5rem] h-1 border-b border-black/30"></div>
                     </div>
                     <div className=" sm:w-[30rem]">
-                        <form className="flex flex-col gap-4 w-full">
+                        <form
+                            onSubmit={handelLogin}
+                            className="flex flex-col gap-4 w-full">
                             <div>
                                 <label
                                     className="text- text-black font-medium mr-auto"
@@ -69,7 +135,7 @@ const Login = () => {
                                 <br />
                                 <input
                                     type="password"
-                                    name=""
+                                    name="password"
                                     id=""
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />

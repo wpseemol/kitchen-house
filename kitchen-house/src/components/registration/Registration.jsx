@@ -3,11 +3,16 @@ import BtnCustom from '../btnCustom/BtnCustom';
 import regBgImage from '../../assets/videos/regBgimage.mp4';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+// import useAxiosBasUrl from '../../hook/useAxiosBasUrl';
+import Swal from 'sweetalert2';
 
 const Registration = () => {
     const [profilePicPrevew, setProfilePicPrevew] = useState(
         'https://i.ibb.co/wBfQjTy/user-Image.png'
     );
+
+    // const axiosBaseUrl = useAxiosBasUrl();
+
     const hendelProfilePicPrevew = (e) => {
         if (e.target.value) {
             setProfilePicPrevew(e.target.value);
@@ -25,8 +30,9 @@ const Registration = () => {
     const handalRegSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
-        const userName = form.userName.value;
+        // const fName = form.fName.value;
+        // const lName = form.lName.value;
+        // const pictureUrl = form.pictureUrl.value;
         const email = form.email.value;
         const password = form.password.value;
 
@@ -34,24 +40,26 @@ const Registration = () => {
             .then(() => {
                 // Signed up Successful
 
-                // Swal.fire({
-                //     title: 'Successful!',
-                //     text: 'Signed up Successful',
-                //     icon: 'success',
-                //     confirmButtonText: 'Okay',
-                // });
+                Swal.fire({
+                    title: 'Successful!',
+                    text: 'Signed up Successful',
+                    icon: 'success',
+                    confirmButtonText: 'Okay',
+                });
+
                 location?.state ? navigate(location?.state) : navigate('/');
                 form.reset();
             })
             .catch((error) => {
-                // Swal.fire({
-                //     title: 'Error!',
-                //     text: error,
-                //     icon: 'error',
-                //     confirmButtonText: 'Okay',
-                // });
+                Swal.fire({
+                    title: 'Error!',
+                    text: error,
+                    icon: 'error',
+                    confirmButtonText: 'Okay',
+                });
             });
     };
+
     return (
         <div className=" grid lg:grid-cols-4 grid-cols-1">
             <div className="lg:col-span-1 lg:block hidden relative">
@@ -84,12 +92,12 @@ const Registration = () => {
                                     <label
                                         className="text- text-black font-medium mr-auto"
                                         htmlFor="name">
-                                        Name
+                                        First ame
                                     </label>
                                     <br />
                                     <input
                                         type="text"
-                                        name="name"
+                                        name="fName"
                                         id="name"
                                         className="border border-black/50 w-full p-2 rounded-md"
                                     />
@@ -98,13 +106,13 @@ const Registration = () => {
                                     <label
                                         className="text- text-black font-medium mr-auto"
                                         htmlFor="userName">
-                                        Username
+                                        Last name
                                     </label>
                                     <br />
                                     <input
                                         type="text"
-                                        name="userName"
-                                        id="userName"
+                                        name="lName"
+                                        id="lName"
                                         className="border border-black/50 w-full p-2 rounded-md"
                                     />
                                 </div>
