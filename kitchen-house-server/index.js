@@ -37,93 +37,13 @@ async function run() {
 
         const itemsCollection = kitchenHouse.collection('items');
 
-        // app.get('/products', async (request, response) => {
-        //     const cursorProducts = products.find();
+        app.get('/food-items', async (request, response) => {
+            const cursorItems = itemsCollection.find();
 
-        //     const resultProducts = await cursorProducts.toArray();
-        //     response.send(resultProducts);
-        // });
-        // app.get('/cart-items', async (request, response) => {
-        //     const cursorCartProduct = cartProduct.find();
+            const resultItems = await cursorItems.toArray();
+            response.send(resultItems);
+        });
 
-        //     const resultCartProduct = await cursorCartProduct.toArray();
-        //     response.send(resultCartProduct);
-        // });
-        // app.get('/', async (request, response) => {
-        //     response.send('Server is Running ...');
-        // });
-
-        // app.get('/products/:category', async (request, response) => {
-        //     const categoryId = request.params.category;
-        //     const query = {
-        //         'category.catId': categoryId,
-        //     };
-        //     const query2 = {
-        //         catId: categoryId,
-        //     };
-
-        //     const options = {
-        //         projection: {
-        //             name: 1,
-        //             price: 1,
-        //             ImgUrl: 1,
-        //             category: 1,
-        //         },
-        //     };
-
-        //     const findCategory = await products.find(query, options);
-        //     const findCategoryBenar = await categoryBenar.find(query2);
-
-        //     const result = await findCategory.toArray();
-        //     const result2 = await findCategoryBenar.toArray();
-
-        //     response.json({
-        //         category: result,
-        //         categoryBenar: result2,
-        //     });
-        // });
-
-        // // single product
-        // app.get('/category/:id', async (request, response) => {
-        //     const id = request.params.id;
-        //     const query = {
-        //         _id: new ObjectId(id),
-        //     };
-        //     const resultItems = await products.findOne(query);
-
-        //     response.send(resultItems);
-        // });
-
-        // //single ite put method
-        // app.put('/category/:id', async (request, response) => {
-        //     const id = request.params.id;
-        //     const query = {
-        //         _id: new ObjectId(id),
-        //     };
-
-        //     const options = {
-        //         upsert: true,
-        //     };
-
-        //     const { filteredObject } = request.body;
-
-        //     const updateDoc = {
-        //         $set: {
-        //             ...filteredObject,
-        //         },
-        //     };
-
-        //     const result = await products.updateOne(query, updateDoc, options);
-        //     response.send(result);
-        // });
-
-        // // data post
-        // app.post('/products', async (request, response) => {
-        //     const product = request.body;
-
-        //     const result = await products.insertOne(product);
-        //     response.send(result);
-        // });
         // add  item
         app.post('/item', async (request, response) => {
             const item = request.body;
@@ -131,18 +51,6 @@ async function run() {
             const result = await itemsCollection.insertOne(item);
             response.send(result);
         });
-
-        // data deleted
-
-        // app.delete('/card-item-remove/:id', async (request, response) => {
-        //     const id = request.params.id;
-        //     const query = {
-        //         _id: new ObjectId(id),
-        //     };
-
-        //     const result = await cartProduct.deleteOne(query);
-        //     response.send(result);
-        // });
     } finally {
     }
 }
