@@ -1,9 +1,32 @@
 import { useState } from 'react';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
+import { FcAddImage, FcRemoveImage } from 'react-icons/fc';
 
 const UploadItem = () => {
     const [catAdd, setCatAdd] = useState(false);
+
+    const [itmeImageCounter, setItmeImageCounter] = useState(2);
+    const [imageAddCounter, setImageAddCounter] = useState([]);
+    const hendelRemoveImage = (rmItem) => {
+        const finterAfterRemove = imageAddCounter?.filter(
+            (item) => item !== rmItem
+        );
+        setImageAddCounter(finterAfterRemove);
+    };
+
+    const handalUploadItme = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const itmeName = form.itmeName.value;
+        const itemPrice = form.itemPrice.value;
+        const description = form.description.value;
+        const itemImageUrl1 = form.url1.value;
+        imageAddCounter.forEach((element) => {
+            console.log(element);
+        });
+    };
+
     return (
         <div className="bg-[#f5f2ed] relative py-20 pb-24 overflow-hidden">
             {/* background Design */}
@@ -41,9 +64,11 @@ const UploadItem = () => {
             </div>
             {/* background Design */}
             {/* pre order section start */}
-            <div className="relative z-[2] container  mx-auto">
+            <div
+                onSubmit={handalUploadItme}
+                className="relative z-[2] container  mx-auto">
                 <div className="">
-                    <div className="w-fit mx-auto bg-white text-[#797979] font-medium p-16 pb-32">
+                    <div className="w-fit mx-auto bg-white text-[#797979] font-medium p-16">
                         <div className="text-white mb-14">
                             <div className="">
                                 <h3 className="font-iconFont text-5xl text-primaryColor">
@@ -57,7 +82,6 @@ const UploadItem = () => {
                                 <input
                                     type="text"
                                     name="itmeName"
-                                    id="fullName"
                                     placeholder="Food item name"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3 "
                                 />
@@ -65,15 +89,60 @@ const UploadItem = () => {
                             <div className="w-[22rem] mb-4">
                                 <input
                                     type="text"
-                                    name="price"
+                                    name="itemPrice"
                                     placeholder="Item Price"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
                                 />
                             </div>
+                            <div className="w-[22rem] mb-4 flex items-center gap-5">
+                                <input
+                                    type="text"
+                                    name="url1"
+                                    placeholder="Item Image Url1"
+                                    className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                />
+                                <div
+                                    onClick={() => {
+                                        setItmeImageCounter(
+                                            itmeImageCounter + 1
+                                        );
+                                        const newItem = `url${itmeImageCounter}`;
+                                        setImageAddCounter([
+                                            ...imageAddCounter,
+                                            newItem,
+                                        ]);
+                                    }}
+                                    className="text-4xl "
+                                    title="Image add">
+                                    <FcAddImage />
+                                </div>
+                            </div>
+                            {imageAddCounter?.map((item, inx) => {
+                                return (
+                                    <div
+                                        key={inx}
+                                        className="w-[22rem] mb-4 flex items-center gap-5">
+                                        <input
+                                            type="text"
+                                            name={item}
+                                            placeholder={`Item Image ${item}`}
+                                            className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                        />
+                                        <div
+                                            onClick={() => {
+                                                hendelRemoveImage(item);
+                                            }}
+                                            className="text-4xl "
+                                            title="Remove">
+                                            <FcRemoveImage />
+                                        </div>
+                                    </div>
+                                );
+                            })}
 
                             <div className="w-full mb-4 md:col-span-2">
-                                <div className="flex items-center gap-5">
-                                    <div className="sm:w-1/2 flex items-center gap-5">
+                                <div className="flex sm:flex-row flex-col items-center gap-5">
+                                    <div className="sm:w-1/2 w-full flex items-center gap-5">
                                         <select
                                             defaultValue="option1"
                                             className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
@@ -101,8 +170,9 @@ const UploadItem = () => {
                                             )}
                                         </div>
                                     </div>
+
                                     <div
-                                        className={`sm:w-1/2 ${
+                                        className={`sm:w-1/2 w-full ${
                                             catAdd ? 'block' : 'hidden'
                                         }`}>
                                         <input
@@ -117,7 +187,7 @@ const UploadItem = () => {
 
                             <div className="md:col-span-2">
                                 <textarea
-                                    name=""
+                                    name="description"
                                     id=""
                                     cols=""
                                     rows="3"
