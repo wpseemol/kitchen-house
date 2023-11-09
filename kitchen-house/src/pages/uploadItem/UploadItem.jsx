@@ -50,12 +50,6 @@ const UploadItem = () => {
         return currentDate;
     };
 
-    useEffect(() => {
-        if (catAdd) {
-            setIsCategorySelected(!isCategorySelected);
-        }
-    }, [catAdd, isCategorySelected]);
-
     const handalUploadItme = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -270,9 +264,11 @@ const UploadItem = () => {
                                             id="occasion"
                                             value={selectedCatOption}
                                             onChange={handleSelectChange}>
-                                            <option value="">Category</option>
+                                            <option value="">
+                                                No category select
+                                            </option>
                                             <option value="option1">
-                                                Category
+                                                Category 1
                                             </option>
                                             <option value="option2">
                                                 Option 2
@@ -284,6 +280,9 @@ const UploadItem = () => {
                                         <div
                                             onClick={() => {
                                                 setCatAdd(!catAdd);
+                                                setIsCategorySelected(
+                                                    !isCategorySelected
+                                                );
                                             }}
                                             className="text-4xl ">
                                             {catAdd ? (

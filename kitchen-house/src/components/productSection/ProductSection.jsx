@@ -2,6 +2,7 @@ import AnimesonBg from '../animesonBg/AnimesonBg';
 import videoUrl from '../../assets/videos/homeProductSectonvideo.mp4';
 import HomeProductItems from '../homeProductItems/HomeProductItems';
 import BtnCustom from '../btnCustom/BtnCustom';
+import { Link } from 'react-router-dom';
 
 const ProductSection = () => {
     return (
@@ -53,7 +54,9 @@ const ProductSection = () => {
                         <HomeProductItems />
 
                         <div className="py-8 pb-12 mx-auto w-fit">
-                            <BtnCustom>All Product</BtnCustom>
+                            <Link to="/food-items">
+                                <BtnCustom>All Product</BtnCustom>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,7 @@ const NavBar = () => {
             </li>
             <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
-                    to="/food"
+                    to="/food-items"
                     className={({ isActive, isPending }) =>
                         isPending
                             ? 'pending'

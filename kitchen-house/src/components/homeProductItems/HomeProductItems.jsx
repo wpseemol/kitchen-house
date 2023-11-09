@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Glide from '@glidejs/glide';
 import Rating from '../rating/Rating';
+import '../../assets/css/hover.css';
 const HomeProductItems = () => {
     useEffect(() => {
         const slider = new Glide('.glide-04', {
@@ -39,14 +40,44 @@ const HomeProductItems = () => {
                 <div className="overflow-hidden" data-glide-el="track">
                     <ul className="whitespace-no-wrap flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-0">
                         <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
+                            {/* product section */}
+                            <div className="max-w-xs rounded-md shadow-md bg-white text-black group relative">
+                                <div className="h-72 relative overflow-hidden">
                                     <img
                                         src="https://source.unsplash.com/random/300x300/?2"
                                         alt=""
                                         className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
                                     />
+                                    {/* over lay */}
+                                    <div className="absolute top-0 left-0 w-full h-full bg-white/40 group-hover:block hidden"></div>
+                                    {/* button section */}
+                                    <div className="absolute bottom-10 left-0 w-full flex justify-center items-center gap-3 group-hover:scale-100 scale-0 duration-300">
+                                        <div>
+                                            <button
+                                                className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
+        relative overflow-hidden
+        ">
+                                                <span className="z-10 relative">
+                                                    Add to cart
+                                                </span>
+                                                <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button
+                                                className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
+        relative overflow-hidden
+        ">
+                                                <span className="z-10 relative">
+                                                    See details
+                                                </span>
+                                                <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {/* button section */}
                                 </div>
+
                                 <div className="w-fit mx-auto mt-4 text-[#FAB421]">
                                     <Rating />
                                 </div>
@@ -62,131 +93,7 @@ const HomeProductItems = () => {
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
-                                </div>
-                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
-                                    <Rating />
-                                </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
-                                </div>
-                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
-                                    <Rating />
-                                </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
-                                </div>
-                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
-                                    <Rating />
-                                </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
-                                </div>
-                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
-                                    <Rating />
-                                </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="max-w-xs rounded-md shadow-md bg-white text-black">
-                                <div className="h-72">
-                                    <img
-                                        src="https://source.unsplash.com/random/300x300/?2"
-                                        alt=""
-                                        className="object-cover object-center w-full rounded-t-md h-full  bg-gray-500"
-                                    />
-                                </div>
-                                <div className="w-fit mx-auto mt-4 text-[#FAB421]">
-                                    <Rating />
-                                </div>
-                                <div className="flex flex-col justify-between p-6 space-y-8">
-                                    <div className="space-y-2">
-                                        <h2 className="text-3xl font-semibold ">
-                                            Donec lectus leo
-                                        </h2>
-                                        <p>
-                                            <span>$</span>
-                                            15.00
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            {/* product section */}
                         </li>
                     </ul>
                 </div>
