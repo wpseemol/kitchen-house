@@ -35,7 +35,7 @@ async function run() {
 
         const kitchenHouse = client.db('kitchenHouse');
 
-        const userCollection = kitchenHouse.collection('users');
+        const itemsCollection = kitchenHouse.collection('items');
 
         // app.get('/products', async (request, response) => {
         //     const cursorProducts = products.find();
@@ -124,15 +124,13 @@ async function run() {
         //     const result = await products.insertOne(product);
         //     response.send(result);
         // });
-        // add cord product
-        // app.post('/user', async (request, response) => {
-        //     const user = request.body;
-
-        //     console.log(user);
-
-        //     const result = await userCollection.insertOne(user);
-        //     response.send(result);
-        // });
+        // add  item
+        app.post('/item', async (request, response) => {
+            const item = request.body;
+            console.log('Item Uploaded');
+            const result = await itemsCollection.insertOne(item);
+            response.send(result);
+        });
 
         // data deleted
 
