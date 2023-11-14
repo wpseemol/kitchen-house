@@ -8,7 +8,7 @@ const HomeProductItems = () => {
             type: 'carousel',
             focusAt: 'center',
             perView: 5,
-            autoplay: 3500,
+            autoplay: 0,
 
             animationDuration: 700,
             gap: 5,
@@ -81,12 +81,18 @@ const HomeProductItems = () => {
                                 <div className="w-fit mx-auto mt-4 text-[#FAB421]">
                                     <Rating />
                                 </div>
+
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
+                                        <p className="text-base font-medium">
+                                            Category: <span> food </span>
+                                        </p>
+
                                         <h2 className="text-3xl font-semibold ">
                                             Donec lectus leo
                                         </h2>
                                         <p>
+                                            Price:
                                             <span>$</span>
                                             15.00
                                         </p>

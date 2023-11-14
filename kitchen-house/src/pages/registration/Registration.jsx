@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import BtnCustom from '../btnCustom/BtnCustom';
+import BtnCustom from '../../components/btnCustom/BtnCustom';
 import regBgImage from '../../assets/videos/regBgimage.mp4';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
@@ -22,7 +22,7 @@ const Registration = () => {
     };
 
     const loginRegInfo = useContext(AuthContext);
-    const { singUp, user } = loginRegInfo || {};
+    const { singUp, loading } = loginRegInfo || {};
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -190,14 +190,16 @@ const Registration = () => {
                             </div>
 
                             <div className="">
-                                <BtnCustom>create account </BtnCustom>
+                                <BtnCustom>
+                                    {loading ? 'Loading...' : 'create account'}
+                                </BtnCustom>
                             </div>
 
                             <div>
                                 <p className="font-light text-base">
-                                    {" Don't have an account?"}
+                                    {' Already have an account? '}
                                     <span className="underline">
-                                        <Link to="/login">Sign up</Link>
+                                        <Link to="/login">Sign In</Link>
                                     </span>
                                 </p>
                             </div>

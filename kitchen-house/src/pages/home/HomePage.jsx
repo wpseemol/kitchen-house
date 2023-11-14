@@ -20,7 +20,7 @@ const HomePage = () => {
             <section>
                 <StoryInfo />
             </section>
-            {/* product section */}
+            {/* product section top sel */}
             <section>
                 <ProductSection />
             </section>

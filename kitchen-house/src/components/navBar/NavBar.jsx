@@ -23,8 +23,8 @@ const NavBar = () => {
                     alt="Kitchen House Icon"
                 />
             </div>
-            <div className=" font-semibold sm:ml-3">
-                <h2 className="font-iconFont ">KitchenHouse</h2>
+            <div className=" font-semibold sm:ml-3 hidden sm:block">
+                <h2 className="font-iconFont">KitchenHouse</h2>
             </div>
         </>
     );
@@ -59,6 +59,19 @@ const NavBar = () => {
             </li>
             <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
+                    to="/card"
+                    className={({ isActive, isPending }) =>
+                        isPending
+                            ? 'pending'
+                            : isActive
+                            ? 'active'
+                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
+                    }>
+                    Card<span>(0)</span>
+                </NavLink>
+            </li>
+            <li className="border-y border-white/10 lg:py-0 py-5">
+                <NavLink
                     to="/blog"
                     className={({ isActive, isPending }) =>
                         isPending
@@ -70,19 +83,7 @@ const NavBar = () => {
                     Blog
                 </NavLink>
             </li>
-            <li className="border-y border-white/10 lg:py-0 py-5">
-                <NavLink
-                    to="/contact"
-                    className={({ isActive, isPending }) =>
-                        isPending
-                            ? 'pending'
-                            : isActive
-                            ? 'active'
-                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
-                    }>
-                    Contact
-                </NavLink>
-            </li>
+
             <li className="border-y border-white/10 lg:py-0 py-5">
                 <NavLink
                     to="/about-us"
@@ -172,7 +173,7 @@ const NavBar = () => {
                 <div className="flex items-center gap-5">
                     <div
                         style={{ boxShadow: '0 0 12px 0px #d1d1d1' }}
-                        className="sm:block hidden p-3 rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
+                        className=" p-3 rounded-full hover:bg-primaryColor hover:text-white duration-200 ">
                         <div className="text-2xl">
                             <GoSearch />
                         </div>

@@ -11,6 +11,21 @@ const PreOrder = () => {
         return day !== 0 && day !== 6;
     };
 
+    const [selectedOccasion, setSelectedOccasion] = useState('');
+    const handleSelectOccasion = (event) => {
+        setSelectedOccasion(event.target.value);
+    };
+
+    const [selectedPreferredFood, setSelectedPreferredFood] = useState('');
+    const handleSelectPreferredFood = (event) => {
+        setSelectedPreferredFood(event.target.value);
+    };
+
+    const [selectedPersons, setSelectedPersons] = useState('');
+    const handleSelectPersons = (event) => {
+        setSelectedPersons(event.target.value);
+    };
+
     return (
         <div className="bg-[#f5f2ed] relative pt-20 overflow-hidden">
             {/* background Design */}
@@ -108,38 +123,38 @@ const PreOrder = () => {
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
+                                    onChange={handleSelectOccasion}
+                                    value={selectedOccasion}
                                     className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
                                     name="occasion"
                                     id="occasion">
+                                    <option value="">
+                                        Occasion no selected
+                                    </option>
                                     <option value="option1">Option 1</option>
                                     <option value="option2">Option 2</option>
-                                    <option value="option3" selected>
-                                        Occasion
-                                    </option>
                                 </select>
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
-                                    defaultValue="option1"
+                                    value={selectedPreferredFood}
+                                    onChange={handleSelectPreferredFood}
                                     className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
                                     name="occasion"
                                     id="preferred-food">
-                                    <option value="option1">
-                                        Preferred food
-                                    </option>
+                                    <option value="">Preferred food</option>
                                     <option value="option2">Option 2</option>
                                     <option value="option3">Option 3</option>
                                 </select>
                             </div>
                             <div className="w-[22rem] mb-4">
                                 <select
-                                    defaultValue="option1"
+                                    value={selectedPersons}
+                                    onChange={handleSelectPersons}
                                     className="border-b border-[#e5e5e5] text-[#797979] w-full focus:outline-none pb-3"
                                     name="occasion"
                                     id="occasion">
-                                    <option value="option1">
-                                        Number of persons
-                                    </option>
+                                    <option value="">Number of persons</option>
                                     <option value="option2">Option 2</option>
                                     <option value="option3">Option 3</option>
                                 </select>

@@ -3,11 +3,12 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/home/HomePage';
 import Root from '../root/Root';
 import Login from '../pages/login/Login';
-import Registration from '../components/registration/Registration';
+import Registration from '../pages/registration/Registration';
 import UploadItem from '../pages/uploadItem/UploadItem';
 import PrivetRoute from '../privetRoute/PrivetRoute';
-import FoodItems from '../components/foodItems/FoodItems';
+
 import ErrorPage from '../pages/error/ErrorPage';
+import FoodItems from '../pages/foodItems/FoodItems';
 
 const router = createBrowserRouter([
     {

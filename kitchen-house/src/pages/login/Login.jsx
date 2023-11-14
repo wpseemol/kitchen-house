@@ -1,13 +1,13 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgLogVideo from '../../assets/videos/loginVideobg.mp4';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
     const loginRegInfo = useContext(AuthContext);
-    const { singIn, logInGoogle } = loginRegInfo || {};
+    const { singIn, logInGoogle, loading } = loginRegInfo || {};
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -97,7 +97,9 @@ const Login = () => {
                                     alt="icon"
                                 />
                             </figure>
-                            <span>Sing in with Google</span>
+                            <span>
+                                {loading ? 'Loading...' : 'Sing in with Google'}
+                            </span>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 mx-auto ">
@@ -142,14 +144,17 @@ const Login = () => {
                             </div>
 
                             <div className="">
-                                <BtnCustom>Sign in</BtnCustom>
+                                <BtnCustom>
+                                    {' '}
+                                    {loading ? 'Loading...' : 'Sign in'}{' '}
+                                </BtnCustom>
                             </div>
 
                             <div>
                                 <p className="font-light text-base">
-                                    {' Already have an account? '}
+                                    {" Don't have an account?"}
                                     <span className="underline">
-                                        <Link to="/registration">Sign In</Link>
+                                        <Link to="/registration">Sign Up</Link>
                                     </span>
                                 </p>
                             </div>

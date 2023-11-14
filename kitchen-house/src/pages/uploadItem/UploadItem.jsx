@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 import { FcAddImage, FcRemoveImage } from 'react-icons/fc';
@@ -53,8 +53,9 @@ const UploadItem = () => {
     const handalUploadItme = (e) => {
         e.preventDefault();
         const form = e.target;
-        const itmeName = form.itmeName.value;
+        const itemName = form.itemName.value;
         const itemPrice = form.itemPrice.value;
+        const itemQuantity = form.itemQuantity.value;
         const addCat = form.addCat.value;
         const description = form.description.value;
 
@@ -69,8 +70,10 @@ const UploadItem = () => {
         if (isCategorySelected) {
             axiosBasUrl
                 .post('/item', {
-                    itmeName,
+                    itemName,
                     itemPrice,
+                    itemQuantity,
+                    buyCount: null,
                     description,
                     itemImage: imageUrls,
                     postBy: {
@@ -149,7 +152,7 @@ const UploadItem = () => {
                 onSubmit={handalUploadItme}
                 className="relative z-[2] container  mx-auto">
                 <div className="">
-                    <div className="w-fit mx-auto bg-white text-[#797979] font-medium p-16">
+                    <div className="w-fit mx-auto bg-white text-[#797979] font-medium sm:p-16 px-2 py-6 ">
                         <div className="text-white mb-14">
                             <div className="">
                                 <h3 className="font-iconFont text-5xl text-primaryColor">
@@ -159,25 +162,40 @@ const UploadItem = () => {
                         </div>
 
                         <form className="grid md:grid-cols-2 grid-cols-1 gap-4  text-xl font-thin">
-                            <div className="w-[22rem] mb-4">
+                            {/* itemName  */}
+                            <div className="sm:w-[22rem] mb-4">
                                 <input
                                     type="text"
-                                    name="itmeName"
+                                    name="itemName"
                                     placeholder="Food item name"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3 "
+                                    id="itemName"
                                 />
                             </div>
-                            <div className="w-[22rem] mb-4">
-                                <input
-                                    type="text"
-                                    name="itemPrice"
-                                    placeholder="Item Price"
-                                    className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
-                                />
+                            {/* price */}
+                            <div className="sm:w-[22rem] mb-4 flex items-center gap-3">
+                                <div className=" ">
+                                    <input
+                                        type="number"
+                                        name="itemPrice"
+                                        placeholder="Item Price"
+                                        className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                        id="itemPrice"
+                                    />
+                                </div>
+                                <div className=" ">
+                                    <input
+                                        type="number"
+                                        name="itemQuantity"
+                                        placeholder="Quantity"
+                                        className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                        id="itemQuantity"
+                                    />
+                                </div>
                             </div>
 
                             {/* itme picture start */}
-                            <div className="relative w-[22rem] mb-4 flex items-center gap-5 group">
+                            <div className="relative sm:w-[22rem] mb-4 flex items-center gap-5 group">
                                 <input
                                     required
                                     onChange={handelImageUrl1}
@@ -217,7 +235,7 @@ const UploadItem = () => {
                                 return (
                                     <div
                                         key={inx}
-                                        className="w-[22rem] mb-4 flex items-center gap-5 relative group">
+                                        className="sm:w-[22rem] mb-4 flex items-center gap-5 relative group">
                                         <input
                                             required={imageUrls[item]}
                                             onChange={(e) =>
