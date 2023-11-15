@@ -37,11 +37,23 @@ async function run() {
 
         const itemsCollection = kitchenHouse.collection('items');
 
+        //get all food items.
         app.get('/food-items', async (request, response) => {
             const cursorItems = itemsCollection.find();
 
             const resultItems = await cursorItems.toArray();
             response.send(resultItems);
+        });
+
+        // get single itme
+        app.get('/food-items/:id', async (request, response) => {
+            const id = request.params.id;
+            const query = {
+                _id: new ObjectId(id),
+            };
+            const result = await itemsCollection.findOne(query);
+
+            response.send(result);
         });
 
         // add  item
