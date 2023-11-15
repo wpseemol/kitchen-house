@@ -9,6 +9,7 @@ import PrivetRoute from '../privetRoute/PrivetRoute';
 
 import ErrorPage from '../pages/error/ErrorPage';
 import FoodItems from '../pages/foodItems/FoodItems';
+import SingleItem from '../pages/singleItem/SingleItem';
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: '/food-items',
                 element: <FoodItems />,
+            },
+            {
+                path: '/food-items/:product',
+                element: <SingleItem />,
             },
             {
                 path: '/login',

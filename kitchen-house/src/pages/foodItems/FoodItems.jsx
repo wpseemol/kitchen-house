@@ -73,7 +73,13 @@ const FoodItems = () => {
                             Our All Food Items
                         </h3>
                     </div>
-                    <div className="hidden sm:block ">
+                    <div className="hidden sm:flex items-center gap-8">
+                        <div>
+                            <p className="font-semibold text-lg">
+                                Showing 1 - <span>{data?.length}</span> Of{' '}
+                                <span>{data?.length}</span> Items
+                            </p>
+                        </div>
                         <div className="flex items-center gap-6 text-xl font-bold">
                             <div
                                 onClick={() => setGridCol('grid')}
@@ -134,7 +140,9 @@ const FoodItems = () => {
                                             <div className="absolute top-0 left-0 w-full h-full bg-white/40 group-hover:block hidden"></div>
                                             {/* button section */}
                                             <div className="absolute bottom-10 left-0 w-full flex justify-center items-center gap-3 group-hover:scale-100 scale-0 duration-300">
-                                                <ItemCartBtn />
+                                                <ItemCartBtn
+                                                    itemId={item?._id}
+                                                />
                                             </div>
                                             {/* button section */}
                                         </>
@@ -170,7 +178,9 @@ const FoodItems = () => {
 
                                         {gridCol === 'col' && (
                                             <div className="flex items-center gap-4">
-                                                <ItemCartBtn />
+                                                <ItemCartBtn
+                                                    itemId={item?._id}
+                                                />
                                             </div>
                                         )}
                                     </div>
