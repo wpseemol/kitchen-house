@@ -169,7 +169,7 @@ const UploadItem = () => {
                                     name="itemName"
                                     placeholder="Food item name"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3 "
-                                    id="itemName"
+                                    id="upItemName"
                                 />
                             </div>
                             {/* price */}
@@ -180,7 +180,7 @@ const UploadItem = () => {
                                         name="itemPrice"
                                         placeholder="Item Price"
                                         className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
-                                        id="itemPrice"
+                                        id="upItemPrice"
                                     />
                                 </div>
                                 <div className=" ">
@@ -189,7 +189,7 @@ const UploadItem = () => {
                                         name="itemQuantity"
                                         placeholder="Quantity"
                                         className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
-                                        id="itemQuantity"
+                                        id="upItemQuantity"
                                     />
                                 </div>
                             </div>
@@ -203,6 +203,7 @@ const UploadItem = () => {
                                     name="url1"
                                     placeholder="Item Image Url1"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                    id="upUrl1"
                                 />
                                 <div
                                     onClick={() => {
@@ -245,6 +246,7 @@ const UploadItem = () => {
                                             name={item}
                                             placeholder={`Item Image ${item}`}
                                             className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                            id={item}
                                         />
                                         <div
                                             onClick={() => {
@@ -321,6 +323,7 @@ const UploadItem = () => {
                                             name="addCat"
                                             placeholder="Category name add"
                                             className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
+                                            id="upAddCat"
                                         />
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@ const Registration = () => {
 
     // const axiosBaseUrl = useAxiosBasUrl();
 
-    const hendelProfilePicPrevew = (e) => {
+    const handelProfilePicPrevew = (e) => {
         if (e.target.value) {
             setProfilePicPrevew(e.target.value);
         } else {
@@ -97,7 +97,7 @@ const Registration = () => {
                                     <br />
                                     <input
                                         type="text"
-                                        name="fName"
+                                        name="regFName"
                                         id="name"
                                         className="border border-black/50 w-full p-2 rounded-md"
                                     />
@@ -112,7 +112,7 @@ const Registration = () => {
                                     <input
                                         type="text"
                                         name="lName"
-                                        id="lName"
+                                        id="regLName"
                                         className="border border-black/50 w-full p-2 rounded-md"
                                     />
                                 </div>
@@ -125,10 +125,10 @@ const Registration = () => {
                                 </label>
                                 <br />
                                 <input
-                                    onChange={hendelProfilePicPrevew}
+                                    onChange={handelProfilePicPrevew}
                                     type="text"
                                     name="pictureUrl"
-                                    id="pictureUrl"
+                                    id="regPictureUrl"
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />
                                 <figure className="absolute group-hover:scale-100 scale-0 top-2 right-2 w-14 h-14 z-10 duration-150">
@@ -148,7 +148,7 @@ const Registration = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    id="email"
+                                    id="regEmail"
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />
                             </div>
@@ -163,7 +163,7 @@ const Registration = () => {
                                 <input
                                     type="password"
                                     name="password"
-                                    id=""
+                                    id="regPassword"
                                     placeholder="6+ characters"
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />
@@ -173,6 +173,7 @@ const Registration = () => {
                                 <input
                                     type="checkbox"
                                     name="agreeWith"
+                                    id="regConfirm"
                                     className="mr-1"
                                     required
                                 />

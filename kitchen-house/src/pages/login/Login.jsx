@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgLogVideo from '../../assets/videos/loginVideobg.mp4';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
@@ -123,7 +123,7 @@ const Login = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    id="email"
+                                    id="logEmail"
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />
                             </div>
@@ -137,7 +137,7 @@ const Login = () => {
                                 <br />
                                 <input
                                     type="password"
-                                    name="password"
+                                    name="logPassword"
                                     id=""
                                     className="border border-black/50 w-full p-2 rounded-md"
                                 />

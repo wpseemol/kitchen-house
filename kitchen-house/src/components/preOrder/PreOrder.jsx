@@ -83,7 +83,7 @@ const PreOrder = () => {
                                 <input
                                     type="text"
                                     name="fullName"
-                                    id="fullName"
+                                    id="preFullName"
                                     placeholder="Full Name"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3 "
                                 />
@@ -92,7 +92,7 @@ const PreOrder = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    id="email"
+                                    id="preEmail"
                                     placeholder="Email address"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
                                 />
@@ -101,7 +101,7 @@ const PreOrder = () => {
                                 <input
                                     type="text"
                                     name="phone"
-                                    id="phone"
+                                    id="prePhone"
                                     placeholder="Phone number"
                                     className=" border-b border-[#e5e5e5] w-full focus:outline-none pb-3"
                                 />
