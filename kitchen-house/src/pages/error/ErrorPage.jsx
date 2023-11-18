@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 const ErrorPage = () => {
     return (
         <>
+            <Helmet>
+                <title>Kitchen House | 404 error </title>
+            </Helmet>
             <header></header>
             <main className="bg-[#f1f5f9] h-screen flex justify-center items-center">
                 <section className="relative overflow-hidden w-[20rem] sm:w-[40rem] md:w-fit">

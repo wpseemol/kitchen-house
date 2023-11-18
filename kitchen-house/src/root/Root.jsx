@@ -10,7 +10,7 @@ const Root = () => {
                 <TopBarContactInfo />
                 <NavBar />
             </header>
-            <main className="font-myPoppinsFont">
+            <main className="font-myPoppinsFont sm:min-h-[20.4rem]">
                 <Outlet />
             </main>
 

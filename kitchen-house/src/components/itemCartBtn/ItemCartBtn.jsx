@@ -1,19 +1,57 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
+import { AuthContext } from '../../providers/AuthProvider';
+import { useContext } from 'react';
+import Swal from 'sweetalert2';
+import PrivetRoute from '../../privetRoute/PrivetRoute';
 
 const ItemCartBtn = ({ itemId }) => {
+    const axiosBasUrl = useAxiosBasUrl();
+    const loginRegInfo = useContext(AuthContext);
+    const { user } = loginRegInfo || {};
+
+    const handelAddCart = () => {
+        axiosBasUrl
+            .post('/card', {
+                productId: itemId,
+                itemQuantity: 1,
+                autherBy: {
+                    email: user?.email,
+                    uid: user?.uid,
+                },
+            })
+            .then(function () {
+                Swal.fire({
+                    title: 'Done!',
+                    text: 'Product Card Add is Done',
+                    icon: 'success',
+                    confirmButtonText: 'Okay',
+                });
+            })
+            .catch(function (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error,
+                    icon: 'error',
+                    confirmButtonText: 'Cool',
+                });
+            });
+    };
+
     return (
         <>
             <div>
-                <Link to={`/food-items/${itemId}`}>
+                <PrivetRoute>
                     <button
+                        onClick={handelAddCart}
                         className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
         relative overflow-hidden
         ">
                         <span className="z-10 relative">Add to cart</span>
                         <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
                     </button>
-                </Link>
+                </PrivetRoute>
             </div>
             <div>
                 <Link to={`/food-items/${itemId}`}>

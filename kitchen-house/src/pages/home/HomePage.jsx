@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <>
             <Helmet>
-                <title>Kitchen House || Home</title>
+                <title>Kitchen House | Home</title>
             </Helmet>
 
             {/* home hero section */}
