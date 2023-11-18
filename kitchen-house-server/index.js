@@ -51,6 +51,46 @@ async function run() {
             const resultItems = await cursorItems.toArray();
             response.send(resultItems);
         });
+        //cardItem get
+        app.get('/card/:email', async (request, response) => {
+            const email = request.params.email;
+
+            const query = {
+                'autherBy.email': email,
+            };
+
+            const cursorCards = cardsCollection.find(query);
+            const cardItemInfo = await cursorCards.toArray();
+
+            await Promise.all(
+                cardItemInfo?.map(async (element) => {
+                    const cardItemQuery = {
+                        _id: new ObjectId(element?.productId),
+                    };
+
+                    const options = {
+                        projection: {
+                            itemName: 1,
+                            itemImage: 1,
+                            itemPrice: 1,
+                        },
+                    };
+
+                    const cardItemResult = await itemsCollection.findOne(
+                        cardItemQuery,
+                        options
+                    );
+                    return {
+                        cardItemResult,
+                        itemQuantity: element?.itemQuantity,
+                    };
+                })
+            ).then((value) => {
+                response.json(value);
+            });
+
+            console.log('Card data Send');
+        });
 
         // get single item
         app.get('/food-items/:id', async (request, response) => {
@@ -76,6 +116,24 @@ async function run() {
             const item = request.body;
             console.log('Item Add to Card');
             const result = await cardsCollection.insertOne(item);
+            response.send(result);
+        });
+
+        // item Quantity update
+        app.put('/quantity/:id', async (request, response) => {
+            const id = request.params.id;
+            const updateQuantity = request.body;
+
+            const filter = { _id: new ObjectId(id) };
+            const updateDocument = {
+                $set: updateQuantity,
+            };
+
+            const result = await itemsCollection.updateOne(
+                filter,
+                updateDocument
+            );
+
             response.send(result);
         });
     } finally {
