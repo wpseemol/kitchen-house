@@ -156,6 +156,9 @@ const FoodItems = () => {
                                                 <div className="absolute bottom-10 left-0 w-full flex justify-center items-center gap-3 group-hover:scale-100 scale-0 duration-300">
                                                     <ItemCartBtn
                                                         itemId={item?._id}
+                                                        itemQuantity={parseInt(
+                                                            item?.itemQuantity
+                                                        )}
                                                     />
                                                 </div>
                                                 {/* button section */}
@@ -197,6 +200,9 @@ const FoodItems = () => {
                                                 <div className="flex items-center gap-4">
                                                     <ItemCartBtn
                                                         itemId={item?._id}
+                                                        itemQuantity={parseInt(
+                                                            item?.itemQuantity
+                                                        )}
                                                     />
                                                 </div>
                                             )}

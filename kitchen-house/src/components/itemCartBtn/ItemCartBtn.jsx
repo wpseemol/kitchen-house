@@ -5,8 +5,11 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
 import PrivetRoute from '../../privetRoute/PrivetRoute';
+import useCardItems from '../../hooks/useCardItems/useCardItems';
 
-const ItemCartBtn = ({ itemId }) => {
+const ItemCartBtn = ({ itemId, itemQuantity }) => {
+    const { refetch } = useCardItems();
+
     const axiosBasUrl = useAxiosBasUrl();
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
@@ -21,15 +24,24 @@ const ItemCartBtn = ({ itemId }) => {
                     uid: user?.uid,
                 },
             })
-            .then(function () {
-                Swal.fire({
-                    title: 'Done!',
-                    text: 'Product Card Add is Done',
-                    icon: 'success',
-                    confirmButtonText: 'Okay',
-                });
+            .then(() => {
+                axiosBasUrl
+                    .put(`/quantity/${itemId}`, {
+                        itemQuantity: itemQuantity - 1,
+                    })
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Done!',
+                            text: 'Product Card Add is Done',
+                            icon: 'success',
+                            confirmButtonText: 'Okay',
+                        });
+
+                        refetch();
+                    })
+                    .catch(() => {});
             })
-            .catch(function (error) {
+            .catch((error) => {
                 Swal.fire({
                     title: 'Error!',
                     text: error,
@@ -72,4 +84,5 @@ export default ItemCartBtn;
 
 ItemCartBtn.propTypes = {
     itemId: PropTypes.string,
+    itemQuantity: PropTypes.number,
 };

@@ -7,8 +7,11 @@ import useWindowPosition from '../../hooks/useWindowPosition/usewindowPosition';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import UserInfo from '../userInfo/UserInfo';
+import useCardItems from '../../hooks/useCardItems/useCardItems';
 
 const NavBar = () => {
+    const { data } = useCardItems();
+
     const loginRegInfo = useContext(AuthContext);
     const { user, logOut } = loginRegInfo || {};
 
@@ -67,7 +70,7 @@ const NavBar = () => {
                             ? 'active'
                             : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
-                    Card<span>(0)</span>
+                    Card<span>({data?.length})</span>
                 </NavLink>
             </li>
             <li className="border-y border-white/10 lg:py-0 py-5">

@@ -14,9 +14,12 @@ import PageLoading from '../../components/pageLoading/PageLoading';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import PrivetRoute from '../../privetRoute/PrivetRoute';
+import useCardItems from '../../hooks/useCardItems/useCardItems';
 
 const SingleItem = () => {
     const { product: productId } = useParams();
+
+    const { refetch } = useCardItems();
 
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
@@ -58,12 +61,21 @@ const SingleItem = () => {
                 },
             })
             .then(function () {
-                Swal.fire({
-                    title: 'Done!',
-                    text: 'Product Card Add is Done',
-                    icon: 'success',
-                    confirmButtonText: 'Okay',
-                });
+                axiosBasUrl
+                    .put(`/quantity/${productId}`, {
+                        itemQuantity: data?.itemQuantity - itemCartCount,
+                    })
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Done!',
+                            text: 'Product Card Add is Done',
+                            icon: 'success',
+                            confirmButtonText: 'Okay',
+                        });
+
+                        refetch();
+                    })
+                    .catch(() => {});
             })
             .catch(function (error) {
                 Swal.fire({
