@@ -5,7 +5,13 @@ const port = process.env.PORT || 5000;
 
 require('dotenv').config();
 
-app.use(cors());
+// Allow requests from 'http://localhost:5173'
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (request, response) => {
@@ -36,6 +42,7 @@ async function run() {
         const kitchenHouse = client.db('kitchenHouse');
 
         const itemsCollection = kitchenHouse.collection('items');
+        const cardsCollection = kitchenHouse.collection('cards');
 
         //get all food items.
         app.get('/food-items', async (request, response) => {
@@ -45,7 +52,7 @@ async function run() {
             response.send(resultItems);
         });
 
-        // get single itme
+        // get single item
         app.get('/food-items/:id', async (request, response) => {
             const id = request.params.id;
             const query = {
@@ -61,6 +68,14 @@ async function run() {
             const item = request.body;
             console.log('Item Uploaded');
             const result = await itemsCollection.insertOne(item);
+            response.send(result);
+        });
+
+        // add  item
+        app.post('/card', async (request, response) => {
+            const item = request.body;
+            console.log('Item Add to Card');
+            const result = await cardsCollection.insertOne(item);
             response.send(result);
         });
     } finally {
