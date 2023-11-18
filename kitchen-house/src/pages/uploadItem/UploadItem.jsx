@@ -73,7 +73,7 @@ const UploadItem = () => {
                     itemName,
                     itemPrice,
                     itemQuantity,
-                    buyCount: null,
+                    buyCount: 0,
                     description,
                     itemImage: imageUrls,
                     postBy: {

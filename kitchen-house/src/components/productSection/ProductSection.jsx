@@ -3,8 +3,34 @@ import videoUrl from '../../assets/videos/homeProductSectonvideo.mp4';
 import HomeProductItems from '../homeProductItems/HomeProductItems';
 import BtnCustom from '../btnCustom/BtnCustom';
 import { Link } from 'react-router-dom';
+import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
+import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import PageLoading from '../pageLoading/PageLoading';
 
 const ProductSection = () => {
+    const axiosBasUrl = useAxiosBasUrl();
+
+    const { data, isLoading } = useQuery({
+        queryKey: ['food-items'],
+        queryFn: async () => {
+            try {
+                const response = await axiosBasUrl.get('/top-sell');
+                return response.data;
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error,
+                    icon: 'error',
+                    confirmButtonText: 'Cool',
+                });
+            }
+        },
+    });
+
+    if (isLoading) {
+        return <PageLoading />;
+    }
     return (
         <>
             <div className="  relative z-[1] w-full -mt-10 my-16 ">
@@ -44,14 +70,14 @@ const ProductSection = () => {
                                 Our Service
                             </h3>
                         </div>
-                        <div>
+                        <div className="py-4">
                             <h2 className="text-5xl font-bold my-5">
                                 Our Top Selling Product
                             </h2>
                         </div>
                     </div>
-                    <div className="container mx-auto">
-                        <HomeProductItems />
+                    <div className=" mx-auto">
+                        <HomeProductItems data={data || []} />
 
                         <div className="py-8 pb-12 mx-auto w-fit">
                             <Link to="/food-items">

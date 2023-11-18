@@ -20,15 +20,19 @@ const NavBar = () => {
 
     const siteIcon = (
         <>
-            <div className="w-16">
-                <img
-                    src="https://i.ibb.co/WxDF0nC/kitchen-house-logo-1.png"
-                    alt="Kitchen House Icon"
-                />
-            </div>
-            <div className=" font-semibold sm:ml-3 hidden sm:block">
-                <h2 className="font-iconFont">KitchenHouse</h2>
-            </div>
+            <Link to="/">
+                <div className="flex items-center">
+                    <div className="w-16">
+                        <img
+                            src="https://i.ibb.co/WxDF0nC/kitchen-house-logo-1.png"
+                            alt="Kitchen House Icon"
+                        />
+                    </div>
+                    <div className=" font-semibold sm:ml-3 hidden sm:block">
+                        <h2 className="font-iconFont">KitchenHouse</h2>
+                    </div>
+                </div>
+            </Link>
         </>
     );
 

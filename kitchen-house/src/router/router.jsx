@@ -32,7 +32,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/card',
-                element: <CardItem />,
+                element: (
+                    <PrivetRoute>
+                        <CardItem />
+                    </PrivetRoute>
+                ),
             },
             {
                 path: '/login',

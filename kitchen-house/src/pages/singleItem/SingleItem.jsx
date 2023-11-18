@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import PageLoading from '../../components/pageLoading/PageLoading';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-import PrivetRoute from '../../privetRoute/PrivetRoute';
+
 import useCardItems from '../../hooks/useCardItems/useCardItems';
 
 const SingleItem = () => {
@@ -27,6 +27,9 @@ const SingleItem = () => {
     const [itemCartCount, setItemCartCount] = useState(1);
     const [imgPreviewWindow, setImgPreviewWindow] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const axiosBasUrl = useAxiosBasUrl();
 
@@ -51,6 +54,11 @@ const SingleItem = () => {
 
     // console.log(itemCartCount);
     const handelAddCart = () => {
+        if (!user) {
+            navigate('/login', { state: { location: location.pathname } });
+            return;
+        }
+
         axiosBasUrl
             .post('/card', {
                 productId: productId,
@@ -261,24 +269,20 @@ const SingleItem = () => {
                                 </div>
                             </div>
                             <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                                <PrivetRoute>
-                                    {' '}
-                                    <div onClick={handelAddCart}>
-                                        <BtnCustom>
-                                            <span>Add Card</span>
-                                        </BtnCustom>
-                                    </div>
-                                </PrivetRoute>
-                                <PrivetRoute>
-                                    <div>
-                                        <BtnCustom>
-                                            <p className="flex justify-center items-center gap-3">
-                                                {' '}
-                                                edit <AiOutlineEdit />
-                                            </p>
-                                        </BtnCustom>
-                                    </div>
-                                </PrivetRoute>
+                                {' '}
+                                <div onClick={handelAddCart}>
+                                    <BtnCustom>
+                                        <span>Add Card</span>
+                                    </BtnCustom>
+                                </div>
+                                <div>
+                                    <BtnCustom>
+                                        <p className="flex justify-center items-center gap-3">
+                                            {' '}
+                                            edit <AiOutlineEdit />
+                                        </p>
+                                    </BtnCustom>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,9 @@ const Login = () => {
                     confirmButtonText: 'Okay',
                 });
 
-                location?.state ? navigate(location?.state) : navigate('/');
+                location?.state
+                    ? navigate(location?.state?.location)
+                    : navigate('/');
                 form.reset();
             })
             .catch((error) => {
@@ -44,6 +46,8 @@ const Login = () => {
             });
     };
 
+    console.log(location);
+
     const handelGoogleLogin = () => {
         logInGoogle()
             .then(() => {
@@ -54,7 +58,9 @@ const Login = () => {
                     confirmButtonText: 'Okay',
                 });
 
-                location?.state ? navigate(location?.state) : navigate('/');
+                location?.state
+                    ? navigate(location?.state?.location)
+                    : navigate('/');
             })
             .catch((error) => {
                 Swal.fire({
