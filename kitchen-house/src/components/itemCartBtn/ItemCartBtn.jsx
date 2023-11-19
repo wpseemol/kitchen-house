@@ -1,20 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
-import PrivetRoute from '../../privetRoute/PrivetRoute';
+
 import useCardItems from '../../hooks/useCardItems/useCardItems';
 
-const ItemCartBtn = ({ itemId, itemQuantity }) => {
+const ItemCartBtn = ({ itemId, productQuantity, buyCount }) => {
     const { refetch } = useCardItems();
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const axiosBasUrl = useAxiosBasUrl();
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
 
     const handelAddCart = () => {
+        if (!user) {
+            navigate('/login', { state: { location: location.pathname } });
+            return;
+        }
+
         axiosBasUrl
             .post('/card', {
                 productId: itemId,
@@ -27,7 +35,8 @@ const ItemCartBtn = ({ itemId, itemQuantity }) => {
             .then(() => {
                 axiosBasUrl
                     .put(`/quantity/${itemId}`, {
-                        itemQuantity: itemQuantity - 1,
+                        itemQuantity: productQuantity - 1,
+                        buyCount: buyCount + 1,
                     })
                     .then(() => {
                         Swal.fire({
@@ -54,16 +63,14 @@ const ItemCartBtn = ({ itemId, itemQuantity }) => {
     return (
         <>
             <div>
-                <PrivetRoute>
-                    <button
-                        onClick={handelAddCart}
-                        className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
+                <button
+                    onClick={handelAddCart}
+                    className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
         relative overflow-hidden
         ">
-                        <span className="z-10 relative">Add to cart</span>
-                        <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
-                    </button>
-                </PrivetRoute>
+                    <span className="z-10 relative">Add to cart</span>
+                    <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
+                </button>
             </div>
             <div>
                 <Link to={`/food-items/${itemId}`}>

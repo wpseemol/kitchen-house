@@ -6,12 +6,14 @@ import { AuthContext } from '../../providers/AuthProvider';
 // import useAxiosBasUrl from '../../hook/useAxiosBasUrl';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 
 const Registration = () => {
     const [profilePicPrevew, setProfilePicPrevew] = useState(
         'https://i.ibb.co/wBfQjTy/user-Image.png'
     );
 
+    const axiosBasUrl = useAxiosBasUrl();
     // const axiosBaseUrl = useAxiosBasUrl();
 
     const handelProfilePicPrevew = (e) => {
@@ -47,6 +49,8 @@ const Registration = () => {
                     icon: 'success',
                     confirmButtonText: 'Okay',
                 });
+
+                axiosBasUrl.post('/jwt', { email }).then(() => {});
 
                 location?.state ? navigate(location?.state) : navigate('/');
                 form.reset();

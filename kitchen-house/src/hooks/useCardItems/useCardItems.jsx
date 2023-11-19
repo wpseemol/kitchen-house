@@ -10,22 +10,11 @@ const useCardItems = () => {
     const { user } = loginRegInfo || {};
     const axiosBasUrl = useAxiosBasUrl();
 
-    const email = user?.email ? user?.email : 'email';
-
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['card-items'],
         queryFn: async () => {
-            try {
-                const response = await axiosBasUrl.get(`/card/${email}`);
-                return response.data;
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error,
-                    icon: 'error',
-                    confirmButtonText: 'Cool',
-                });
-            }
+            const response = await axiosBasUrl.get(`/card-data/`);
+            return response.data;
         },
     });
 

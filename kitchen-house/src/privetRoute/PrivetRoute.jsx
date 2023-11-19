@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { Navigate, useLocation } from 'react-router-dom';
+import PageLoading from '../components/pageLoading/PageLoading';
 
 const PrivetRoute = ({ children }) => {
     const loginRegInfo = useContext(AuthContext);
@@ -10,7 +11,7 @@ const PrivetRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <p>Loading ...</p>;
+        return <PageLoading></PageLoading>;
     }
     if (user) {
         return children;

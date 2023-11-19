@@ -72,6 +72,7 @@ const SingleItem = () => {
                 axiosBasUrl
                     .put(`/quantity/${productId}`, {
                         itemQuantity: data?.itemQuantity - itemCartCount,
+                        buyCount: data?.buyCount + itemCartCount,
                     })
                     .then(() => {
                         Swal.fire({

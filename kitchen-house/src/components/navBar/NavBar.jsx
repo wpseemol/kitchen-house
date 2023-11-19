@@ -74,7 +74,7 @@ const NavBar = () => {
                             ? 'active'
                             : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
-                    Card<span>({data?.length})</span>
+                    Card {user && <span>({data?.length || 0})</span>}
                 </NavLink>
             </li>
             <li className="border-y border-white/10 lg:py-0 py-5">

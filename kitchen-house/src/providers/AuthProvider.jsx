@@ -48,6 +48,8 @@ const AuthProvider = ({ children }) => {
 
     //logOut function
     const logOut = () => {
+        //remove token when logout user
+
         SetLoading(true);
         return signOut(auth);
     };

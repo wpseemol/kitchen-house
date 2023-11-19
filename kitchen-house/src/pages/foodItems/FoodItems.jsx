@@ -203,6 +203,9 @@ const FoodItems = () => {
                                                         itemQuantity={parseInt(
                                                             item?.itemQuantity
                                                         )}
+                                                        buyCount={parseInt(
+                                                            item?.buyCount
+                                                        )}
                                                     />
                                                 </div>
                                             )}

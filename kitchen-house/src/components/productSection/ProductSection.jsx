@@ -11,7 +11,7 @@ import PageLoading from '../pageLoading/PageLoading';
 const ProductSection = () => {
     const axiosBasUrl = useAxiosBasUrl();
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ['food-items'],
         queryFn: async () => {
             try {
@@ -77,7 +77,7 @@ const ProductSection = () => {
                         </div>
                     </div>
                     <div className=" mx-auto">
-                        <HomeProductItems data={data || []} />
+                        <HomeProductItems data={data || []} refetch={refetch} />
 
                         <div className="py-8 pb-12 mx-auto w-fit">
                             <Link to="/food-items">

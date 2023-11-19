@@ -5,9 +5,11 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 
 const Login = () => {
     const loginRegInfo = useContext(AuthContext);
+    const axiosBasUrl = useAxiosBasUrl();
     const { singIn, logInGoogle, loading } = loginRegInfo || {};
 
     const location = useLocation();
@@ -31,6 +33,9 @@ const Login = () => {
                     confirmButtonText: 'Okay',
                 });
 
+                // get access token
+                axiosBasUrl.post('/jwt', { email }).then(() => {});
+
                 location?.state
                     ? navigate(location?.state?.location)
                     : navigate('/');
@@ -46,11 +51,9 @@ const Login = () => {
             });
     };
 
-    console.log(location);
-
     const handelGoogleLogin = () => {
         logInGoogle()
-            .then(() => {
+            .then((result) => {
                 Swal.fire({
                     title: 'Successful',
                     text: 'Log in Successful',
@@ -58,6 +61,9 @@ const Login = () => {
                     confirmButtonText: 'Okay',
                 });
 
+                const email = result?.user?.email;
+                // jwt token set
+                axiosBasUrl.post('/jwt', { email }).then(() => {});
                 location?.state
                     ? navigate(location?.state?.location)
                     : navigate('/');
