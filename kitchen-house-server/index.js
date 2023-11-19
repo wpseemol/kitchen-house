@@ -1,18 +1,40 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 5000;
 
 require('dotenv').config();
 
 // Allow requests from 'http://localhost:5173'
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173'],
     credentials: true,
 };
 
+// middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
+
+const secret =
+    '778837f8f69f6d693bd2369630198e38b3e92ce6d3871fcad05286cf4b8a83187fec4173d3400a81d53277f915e75e08dbea65a972ddb53f779988d21961874f';
+
+const verifyToken = async (request, response, next) => {
+    const token = request.cookies['access-token'];
+    if (!token) {
+        return response.status(401).send({ message: 'unauthorized' });
+    }
+    jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+            return response.status(401).send({ message: 'unauthorized' });
+        }
+
+        request.user = decoded;
+        next();
+    });
+};
 
 app.get('/', (request, response) => {
     response.send('Server is running...');
@@ -51,9 +73,24 @@ async function run() {
             const resultItems = await cursorItems.toArray();
             response.send(resultItems);
         });
+
+        // get to sell Product
+        app.get('/top-sell', async (request, response) => {
+            const sort = { buyCount: -1 };
+            const offset = 0;
+            const limit = 5;
+            const cursorItems = itemsCollection
+                .find()
+                .sort(sort)
+                .skip(offset)
+                .limit(limit);
+
+            const result = await cursorItems.toArray();
+            response.send(result);
+        });
         //cardItem get
-        app.get('/card/:email', async (request, response) => {
-            const email = request.params.email;
+        app.get('/card-data/', verifyToken, async (request, response) => {
+            const email = request?.user?.email;
 
             const query = {
                 'autherBy.email': email,
@@ -83,13 +120,12 @@ async function run() {
                     return {
                         cardItemResult,
                         itemQuantity: element?.itemQuantity,
+                        _id: element._id,
                     };
                 })
             ).then((value) => {
                 response.json(value);
             });
-
-            console.log('Card data Send');
         });
 
         // get single item
@@ -119,6 +155,34 @@ async function run() {
             response.send(result);
         });
 
+        //jwt related api
+        app.post('/jwt', async (request, response) => {
+            const user = request.body;
+
+            const token = jwt.sign(user, secret, { expiresIn: '30d' });
+
+            response
+                .cookie('access-token', token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none',
+                })
+                .send({ success: true });
+        });
+
+        // cookie remove
+        app.post('/logout', (request, response) => {
+            // Clear the 'access-token' cookie
+            response.cookie('access-token', '', {
+                expires: new Date(0),
+                httpOnly: true,
+                secure: true,
+                sameSite: 'none',
+            });
+
+            response.send({ success: true });
+        });
+
         // item Quantity update
         app.put('/quantity/:id', async (request, response) => {
             const id = request.params.id;
@@ -135,6 +199,18 @@ async function run() {
             );
 
             response.send(result);
+        });
+
+        // remove card Item
+        app.delete('/card-item-remove/:id', async (request, response) => {
+            const id = request.params.id;
+            const query = {
+                _id: new ObjectId(id),
+            };
+
+            const result = await cardsCollection.deleteOne(query);
+            response.send(result);
+            console.log('Card Item remove');
         });
     } finally {
     }
