@@ -1,16 +1,20 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgLogVideo from '../../assets/videos/loginVideobg.mp4';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
     const loginRegInfo = useContext(AuthContext);
     const axiosBasUrl = useAxiosBasUrl();
     const { singIn, logInGoogle, loading } = loginRegInfo || {};
+
+    const [googleLoginLoading, setGoogleLoginLoading] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -18,11 +22,22 @@ const Login = () => {
     const handelLogin = (e) => {
         e.preventDefault();
         const form = e.target;
-        // const fName = form.fName.value;
-        // const lName = form.lName.value;
-        // const pictureUrl = form.pictureUrl.value;
+
         const email = form.email.value;
         const password = form.password.value;
+
+        if (password.length < 6) {
+            toast('Password less than 6 Character.');
+            return;
+        }
+        if (!/[A-Z]/.test(password)) {
+            toast('Password must least one capital letter.');
+            return;
+        }
+        if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)) {
+            toast('Password must have special character');
+            return;
+        }
 
         singIn(email, password)
             .then(() => {
@@ -52,6 +67,7 @@ const Login = () => {
     };
 
     const handelGoogleLogin = () => {
+        setGoogleLoginLoading(true);
         logInGoogle()
             .then((result) => {
                 Swal.fire({
@@ -115,7 +131,7 @@ const Login = () => {
                                     />
                                 </figure>
                                 <span>
-                                    {loading
+                                    {googleLoginLoading
                                         ? 'Loading...'
                                         : 'Sing in with Google'}
                                 </span>
@@ -140,6 +156,7 @@ const Login = () => {
                                     </label>
                                     <br />
                                     <input
+                                        required
                                         type="email"
                                         name="email"
                                         id="logEmail"
@@ -155,9 +172,10 @@ const Login = () => {
                                     </label>
                                     <br />
                                     <input
+                                        required
                                         type="password"
-                                        name="logPassword"
-                                        id=""
+                                        name="password"
+                                        id="logPass"
                                         className="border border-black/50 w-full p-2 rounded-md"
                                     />
                                 </div>
@@ -186,6 +204,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     );
 };

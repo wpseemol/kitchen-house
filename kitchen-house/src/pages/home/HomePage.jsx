@@ -3,6 +3,8 @@ import HomeHero from '../../components/homeHero/HomeHero';
 import PreOrder from '../../components/preOrder/PreOrder';
 import ProductSection from '../../components/productSection/ProductSection';
 import StoryInfo from '../../components/storyInfo/StoryInfo';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const HomePage = () => {
     return (
@@ -29,6 +31,8 @@ const HomePage = () => {
             <section>
                 <PreOrder />
             </section>
+
+            <ToastContainer />
         </>
     );
 };

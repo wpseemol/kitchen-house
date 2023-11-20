@@ -6,8 +6,9 @@ import { useContext } from 'react';
 import Swal from 'sweetalert2';
 
 import useCardItems from '../../hooks/useCardItems/useCardItems';
+import { toast } from 'react-toastify';
 
-const ItemCartBtn = ({ itemId, productQuantity, buyCount }) => {
+const ItemCartBtn = ({ itemId, itemQuantity, buyCount, uid }) => {
     const { refetch } = useCardItems();
 
     const location = useLocation();
@@ -23,6 +24,12 @@ const ItemCartBtn = ({ itemId, productQuantity, buyCount }) => {
             return;
         }
 
+        if (uid === user?.uid) {
+            toast("Item is posted by you, You Can'n Add Card");
+            console.log('you are ');
+            return;
+        }
+
         axiosBasUrl
             .post('/card', {
                 productId: itemId,
@@ -35,7 +42,7 @@ const ItemCartBtn = ({ itemId, productQuantity, buyCount }) => {
             .then(() => {
                 axiosBasUrl
                     .put(`/quantity/${itemId}`, {
-                        itemQuantity: productQuantity - 1,
+                        itemQuantity: itemQuantity - 1,
                         buyCount: buyCount + 1,
                     })
                     .then(() => {
@@ -62,14 +69,21 @@ const ItemCartBtn = ({ itemId, productQuantity, buyCount }) => {
 
     return (
         <>
-            <div>
+            <div title={itemQuantity <= 0 ? 'Item Out Of Stock' : ''}>
                 <button
-                    onClick={handelAddCart}
-                    className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
+                    onClick={() => itemQuantity <= 0 || handelAddCart()}
+                    className={`${
+                        itemQuantity <= 0 ? 'bg-white' : 'bg-black'
+                    } btnContainer  text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
         relative overflow-hidden
-        ">
+        `}>
                     <span className="z-10 relative">Add to cart</span>
-                    <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
+                    <div
+                        className={`${
+                            itemQuantity <= 0
+                                ? 'bg-primaryColor/50'
+                                : 'hoverContent bg-primaryColor'
+                        } absolute -top-1  -left-1  duration-500 w-[25rem] h-[10rem]  `}></div>
                 </button>
             </div>
             <div>
@@ -92,4 +106,6 @@ export default ItemCartBtn;
 ItemCartBtn.propTypes = {
     itemId: PropTypes.string,
     itemQuantity: PropTypes.number,
+    buyCount: PropTypes.number,
+    uid: PropTypes.string,
 };

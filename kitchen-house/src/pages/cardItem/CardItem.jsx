@@ -1,49 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import useCardItems from '../../hooks/useCardItems/useCardItems';
 import PageLoading from '../../components/pageLoading/PageLoading';
-import { FaTrashCan } from 'react-icons/fa6';
-import { useState } from 'react';
-import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
-import Swal from 'sweetalert2';
+
 import { useNavigate } from 'react-router-dom';
 import BtnCustom from '../../components/btnCustom/BtnCustom';
 import CardItemComponent from '../../components/CardItemComponent/CardItemComponent';
 
 const CardItem = () => {
-    const axiosBasUrl = useAxiosBasUrl();
-
     const navigate = useNavigate();
-
     const { data: cardData = [], isLoading, refetch } = useCardItems();
-
-    const handelRemoveFromCard = (removeId) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'Do you want to remove',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosBasUrl
-                    .delete(`/card-item-remove/${removeId}`)
-                    .then(() => {
-                        refetch();
-                        Swal.fire(
-                            'Deleted!',
-                            'Your Card Item has been remove.',
-                            'success'
-                        );
-                    })
-                    .catch((error) => {
-                        Swal.fire('Deleted!', error, 'success');
-                    });
-            }
-        });
-    };
-
     if (isLoading) {
         return (
             <>
@@ -51,8 +16,6 @@ const CardItem = () => {
             </>
         );
     }
-
-    cardData?.length === 0;
 
     return (
         <>

@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
 
@@ -29,6 +30,15 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, siEmail, siPassword);
     };
 
+    //user information
+    const userInformationSet = (name, profilePicture) => {
+        SetLoading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: profilePicture,
+        });
+    };
+
     const logInGoogle = () => {
         SetLoading(true);
         return signInWithPopup(auth, googleProvider);
@@ -48,8 +58,6 @@ const AuthProvider = ({ children }) => {
 
     //logOut function
     const logOut = () => {
-        //remove token when logout user
-
         SetLoading(true);
         return signOut(auth);
     };
@@ -61,6 +69,7 @@ const AuthProvider = ({ children }) => {
         logOut,
         loading,
         logInGoogle,
+        userInformationSet,
     };
     return (
         <AuthContext.Provider value={loginAndRegInfo}>

@@ -6,15 +6,15 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-tabs';
 import { IoMdAdd, IoMdClose } from 'react-icons/io';
 import { AiOutlineEdit, AiOutlineMinus } from 'react-icons/ai';
 import { Helmet } from 'react-helmet-async';
-
 import BtnCustom from '../../components/btnCustom/BtnCustom';
 import 'react-tabs/style/react-tabs.css';
 import Swal from 'sweetalert2';
 import PageLoading from '../../components/pageLoading/PageLoading';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-
 import useCardItems from '../../hooks/useCardItems/useCardItems';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const SingleItem = () => {
     const { product: productId } = useParams();
@@ -24,7 +24,6 @@ const SingleItem = () => {
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
 
-    const [itemCartCount, setItemCartCount] = useState(1);
     const [imgPreviewWindow, setImgPreviewWindow] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
 
@@ -32,6 +31,8 @@ const SingleItem = () => {
     const navigate = useNavigate();
 
     const axiosBasUrl = useAxiosBasUrl();
+
+    const [itemCartCount, setItemCartCount] = useState(1);
 
     const { data, isLoading } = useQuery({
         queryKey: ['item'],
@@ -52,13 +53,16 @@ const SingleItem = () => {
         },
     });
 
-    // console.log(itemCartCount);
     const handelAddCart = () => {
         if (!user) {
             navigate('/login', { state: { location: location.pathname } });
             return;
         }
 
+        if (data?.postBy?.uid === user?.uid) {
+            toast("Item is posted by you, You Can'n Add Card");
+            return;
+        }
         axiosBasUrl
             .post('/card', {
                 productId: productId,
@@ -208,9 +212,28 @@ const SingleItem = () => {
                                 <p className="my-3 text-lg font-semibold">
                                     Category: <span>{data?.itemName}</span>
                                 </p>
-                                <p className="text-lg">
-                                    Price: <span>${data?.itemPrice}.00</span>
-                                </p>
+                                <div className="flex items-center gap-5">
+                                    <p className="text-lg">
+                                        Price:{' '}
+                                        <span>${data?.itemPrice}.00</span>
+                                    </p>
+                                    <div
+                                        className={`${
+                                            data?.itemQuantity <= 0
+                                                ? 'bg-red-500/30'
+                                                : 'bg-primaryColor/30'
+                                        } p-3  font-semibold rounded`}>
+                                        <p>
+                                            Status:{' '}
+                                            <span>
+                                                {' '}
+                                                {data?.itemQuantity <= 0
+                                                    ? 'Out Of Stock'
+                                                    : 'In Stock'}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
                                 <p className="my-3 text-lg">
                                     Author: <span>{data?.postBy?.name}</span>
                                 </p>
@@ -271,7 +294,16 @@ const SingleItem = () => {
                             </div>
                             <div className="mt-6 flex flex-col sm:flex-row gap-4">
                                 {' '}
-                                <div onClick={handelAddCart}>
+                                <div
+                                    title={
+                                        data?.itemQuantity <= 0
+                                            ? 'Item Out Of Stock'
+                                            : ''
+                                    }
+                                    onClick={() =>
+                                        data?.itemQuantity <= 0 ||
+                                        handelAddCart()
+                                    }>
                                     <BtnCustom>
                                         <span>Add Card</span>
                                     </BtnCustom>
@@ -320,6 +352,7 @@ const SingleItem = () => {
                                 </TabPanel>
                             </Tabs>
                         </div>
+                        <ToastContainer />
                     </div>
                 </div>
             </div>

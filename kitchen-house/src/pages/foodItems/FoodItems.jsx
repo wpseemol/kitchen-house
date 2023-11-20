@@ -9,6 +9,8 @@ import { useState } from 'react';
 import ItemCartBtn from '../../components/itemCartBtn/ItemCartBtn';
 import { Helmet } from 'react-helmet-async';
 import PageLoading from '../../components/pageLoading/PageLoading';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const FoodItems = () => {
     const [gridCol, setGridCol] = useState('grid');
@@ -159,6 +161,10 @@ const FoodItems = () => {
                                                         itemQuantity={parseInt(
                                                             item?.itemQuantity
                                                         )}
+                                                        buyCount={parseInt(
+                                                            item?.buyCount
+                                                        )}
+                                                        uid={item?.postBy?.uid}
                                                     />
                                                 </div>
                                                 {/* button section */}
@@ -206,6 +212,7 @@ const FoodItems = () => {
                                                         buyCount={parseInt(
                                                             item?.buyCount
                                                         )}
+                                                        uid={item?.postBy?.uid}
                                                     />
                                                 </div>
                                             )}
@@ -217,6 +224,7 @@ const FoodItems = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     );
 };

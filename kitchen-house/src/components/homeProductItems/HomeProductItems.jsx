@@ -6,6 +6,7 @@ import useCardItems from '../../hooks/useCardItems/useCardItems';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useContext } from 'react';
+import ItemCartBtn from '../itemCartBtn/ItemCartBtn';
 
 const HomeProductItems = ({ data, refetch }) => {
     const { refetch: carditemRefetch } = useCardItems();
@@ -81,38 +82,16 @@ const HomeProductItems = ({ data, refetch }) => {
                                         <div className="absolute top-0 left-0 w-full h-full bg-white/40 group-hover:block hidden"></div>
                                         {/* button section */}
                                         <div className="absolute bottom-10 left-0 w-full flex justify-center items-center gap-3 group-hover:scale-100 scale-0 duration-300">
-                                            <div>
-                                                <button
-                                                    onClick={() =>
-                                                        handelAddCart(
-                                                            item?._id,
-                                                            item?.itemQuantity,
-                                                            item?.buyCount
-                                                        )
-                                                    }
-                                                    className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
-        relative overflow-hidden
-        ">
-                                                    <span className="z-[11] relative">
-                                                        Add to cart
-                                                    </span>
-                                                    <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <Link
-                                                    to={`/food-items/${item?._id}`}>
-                                                    <button
-                                                        className="btnContainer bg-black text-white rounded-full px-4 py-2 text-sm z-10 font-semibold capitalize 
-        relative overflow-hidden
-        ">
-                                                        <span className="z-10 relative">
-                                                            See details
-                                                        </span>
-                                                        <div className="absolute -top-1 hoverContent -left-1  duration-500 w-[25rem] h-[10rem] bg-primaryColor "></div>
-                                                    </button>
-                                                </Link>
-                                            </div>
+                                            <ItemCartBtn
+                                                itemId={item?._id}
+                                                itemQuantity={parseInt(
+                                                    item?.itemQuantity
+                                                )}
+                                                buyCount={parseInt(
+                                                    item?.buyCount
+                                                )}
+                                                uid={item?.postBy?.uid}
+                                            />
                                         </div>
                                         {/* button section */}
                                     </div>
@@ -158,4 +137,5 @@ export default HomeProductItems;
 
 HomeProductItems.propTypes = {
     data: PropTypes.array,
+    refetch: PropTypes.func,
 };
