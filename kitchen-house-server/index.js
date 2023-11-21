@@ -201,6 +201,28 @@ async function run() {
             response.send(result);
         });
 
+        // item Quantity update
+        app.put(
+            '/card-quantity/:id',
+            verifyToken,
+            async (request, response) => {
+                const id = request.params.id;
+                const updateQuantity = request.body;
+
+                const filter = { _id: new ObjectId(id) };
+                const updateDocument = {
+                    $set: updateQuantity,
+                };
+
+                const result = await cardsCollection.updateOne(
+                    filter,
+                    updateDocument
+                );
+
+                response.send(result);
+            }
+        );
+
         // remove card Item
         app.delete('/card-item-remove/:id', async (request, response) => {
             const id = request.params.id;
