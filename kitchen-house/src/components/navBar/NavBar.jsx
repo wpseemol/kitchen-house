@@ -10,7 +10,7 @@ import UserInfo from '../userInfo/UserInfo';
 import useCardItems from '../../hooks/useCardItems/useCardItems';
 
 const NavBar = () => {
-    const { data } = useCardItems();
+    const { cardData } = useCardItems();
 
     const loginRegInfo = useContext(AuthContext);
     const { user, logOut } = loginRegInfo || {};
@@ -74,7 +74,7 @@ const NavBar = () => {
                             ? 'active'
                             : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
                     }>
-                    Card {user && <span>({data?.length || 0})</span>}
+                    Card {user && <span>({cardData?.length || 0})</span>}
                 </NavLink>
             </li>
             <li className="border-y border-white/10 lg:py-0 py-5">

@@ -8,7 +8,7 @@ import CardItemComponent from '../../components/CardItemComponent/CardItemCompon
 
 const CardItem = () => {
     const navigate = useNavigate();
-    const { data: cardData = [], isLoading, refetch } = useCardItems();
+    const { cardData = [], isLoading, refetch } = useCardItems();
     if (isLoading) {
         return (
             <>

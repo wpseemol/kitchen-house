@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import { useQuery } from '@tanstack/react-query';
@@ -19,12 +19,20 @@ import { ToastContainer, toast } from 'react-toastify';
 const SingleItem = () => {
     const { product: productId } = useParams();
 
-    const { refetch } = useCardItems();
+    const { cardData, refetch } = useCardItems();
 
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
 
+    const [outStock, setOutStock] = useState(false);
+    useEffect(() => {
+        setTimeout(() => {
+            setOutStock(false);
+        }, 300);
+    }, [outStock]);
+
     const [imgPreviewWindow, setImgPreviewWindow] = useState(false);
+
     const [previewImage, setPreviewImage] = useState('');
 
     const location = useLocation();
@@ -33,6 +41,10 @@ const SingleItem = () => {
     const axiosBasUrl = useAxiosBasUrl();
 
     const [itemCartCount, setItemCartCount] = useState(1);
+
+    const cardDataItemId = cardData.map((item) => {
+        return item.cardItemResult._id;
+    });
 
     const { data, isLoading } = useQuery({
         queryKey: ['item'],
@@ -53,16 +65,48 @@ const SingleItem = () => {
         },
     });
 
+    const cardItemId = cardData.find((item) => {
+        return item?.cardItemResult?._id === data?._id;
+    });
+
     const handelAddCart = () => {
         if (!user) {
             navigate('/login', { state: { location: location.pathname } });
             return;
         }
 
-        if (data?.postBy?.uid === user?.uid) {
+        if (data?.postBy?.email === user?.email) {
             toast("Item is posted by you, You Can'n Add Card");
             return;
         }
+
+        if (cardDataItemId.includes(data?._id)) {
+            axiosBasUrl
+                .put(`/card-quantity/${cardItemId?._id}`, {
+                    itemQuantity: cardItemId?.itemQuantity + itemCartCount,
+                })
+                .then(() => {
+                    axiosBasUrl
+                        .put(`/quantity/${productId}`, {
+                            itemQuantity: data?.itemQuantity - itemCartCount,
+                            buyCount: data?.buyCount + itemCartCount,
+                        })
+                        .then(() => {
+                            refetch();
+                            Swal.fire({
+                                title: 'Done!',
+                                text: `Item Is already Card,so Update ${itemCartCount}`,
+                                icon: 'success',
+                                confirmButtonText: 'Okay',
+                            }).then(() => {
+                                navigate('/card');
+                            });
+                        });
+                });
+
+            return;
+        }
+
         axiosBasUrl
             .post('/card', {
                 productId: productId,
@@ -212,7 +256,7 @@ const SingleItem = () => {
                                 <p className="my-3 text-lg font-semibold">
                                     Category: <span>{data?.itemName}</span>
                                 </p>
-                                <div className="flex items-center gap-5">
+                                <div className="flex flex-wrap items-center gap-5">
                                     <p className="text-lg">
                                         Price:{' '}
                                         <span>${data?.itemPrice}.00</span>
@@ -222,6 +266,10 @@ const SingleItem = () => {
                                             data?.itemQuantity <= 0
                                                 ? 'bg-red-500/30'
                                                 : 'bg-primaryColor/30'
+                                        } ${
+                                            outStock
+                                                ? 'scale-110 duration-200'
+                                                : 'scale-100 duration-200'
                                         } p-3  font-semibold rounded`}>
                                         <p>
                                             Status:{' '}
@@ -301,8 +349,9 @@ const SingleItem = () => {
                                             : ''
                                     }
                                     onClick={() =>
-                                        data?.itemQuantity <= 0 ||
-                                        handelAddCart()
+                                        data?.itemQuantity <= 0
+                                            ? setOutStock(true)
+                                            : handelAddCart()
                                     }>
                                     <BtnCustom>
                                         <span>Add Card</span>

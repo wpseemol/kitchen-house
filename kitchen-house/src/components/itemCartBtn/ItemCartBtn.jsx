@@ -9,7 +9,7 @@ import useCardItems from '../../hooks/useCardItems/useCardItems';
 import { toast } from 'react-toastify';
 
 const ItemCartBtn = ({ itemId, itemQuantity, buyCount, uid }) => {
-    const { refetch } = useCardItems();
+    const { cardData, refetch } = useCardItems();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -17,6 +17,14 @@ const ItemCartBtn = ({ itemId, itemQuantity, buyCount, uid }) => {
     const axiosBasUrl = useAxiosBasUrl();
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
+
+    const cardDataItemId = cardData.map((item) => {
+        return item.cardItemResult._id;
+    });
+
+    const cardItemId = cardData.find((item) => {
+        return item?.cardItemResult?._id === itemId;
+    });
 
     const handelAddCart = () => {
         if (!user) {
@@ -27,6 +35,33 @@ const ItemCartBtn = ({ itemId, itemQuantity, buyCount, uid }) => {
         if (uid === user?.uid) {
             toast("Item is posted by you, You Can'n Add Card");
             console.log('you are ');
+            return;
+        }
+
+        if (cardDataItemId.includes(itemId)) {
+            axiosBasUrl
+                .put(`/card-quantity/${cardItemId?._id}`, {
+                    itemQuantity: cardItemId?.itemQuantity + 1,
+                })
+                .then(() => {
+                    axiosBasUrl
+                        .put(`/quantity/${itemId}`, {
+                            itemQuantity: itemQuantity - 1,
+                            buyCount: buyCount + 1,
+                        })
+                        .then(() => {
+                            refetch();
+                            Swal.fire({
+                                title: 'Done!',
+                                text: `Item Is already Card,so Update 1`,
+                                icon: 'success',
+                                confirmButtonText: 'Okay',
+                            }).then(() => {
+                                navigate('/card');
+                            });
+                        });
+                });
+
             return;
         }
 
