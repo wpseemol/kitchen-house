@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs';
@@ -358,12 +358,14 @@ const SingleItem = () => {
                                     </BtnCustom>
                                 </div>
                                 <div>
-                                    <BtnCustom>
-                                        <p className="flex justify-center items-center gap-3">
-                                            {' '}
-                                            edit <AiOutlineEdit />
-                                        </p>
-                                    </BtnCustom>
+                                    <Link to={`/upload-item/${productId}`}>
+                                        <BtnCustom>
+                                            <p className="flex justify-center items-center gap-3">
+                                                {' '}
+                                                edit <AiOutlineEdit />
+                                            </p>
+                                        </BtnCustom>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

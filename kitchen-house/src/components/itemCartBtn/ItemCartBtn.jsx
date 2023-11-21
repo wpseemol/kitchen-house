@@ -56,8 +56,6 @@ const ItemCartBtn = ({ itemId, itemQuantity, buyCount, uid }) => {
                                 text: `Item Is already Card,so Update 1`,
                                 icon: 'success',
                                 confirmButtonText: 'Okay',
-                            }).then(() => {
-                                navigate('/card');
                             });
                         });
                 });

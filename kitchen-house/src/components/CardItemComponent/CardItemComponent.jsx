@@ -3,9 +3,16 @@ import { FaTrashCan } from 'react-icons/fa6';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
 import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
+import useAllFoodItem from '../../hooks/useAllFoodItem/useAllFoodItem';
 
 const CardItemComponent = ({ data, refetch }) => {
     const axiosBasUrl = useAxiosBasUrl();
+
+    const { data: allFoodItems } = useAllFoodItem();
+
+    const cardItemFind = allFoodItems.find(
+        (item) => item?._id === data?.cardItemResult?._id
+    );
 
     const [productQuantity, setProductQuantity] = useState(data?.itemQuantity);
 
@@ -38,7 +45,7 @@ const CardItemComponent = ({ data, refetch }) => {
     };
 
     return (
-        <tr className="transition-colors duration-300 hover:bg-primaryColor/60 ">
+        <tr className="transition-colors duration-300 hover:bg-primaryColor/20 ">
             <td className="h-12 px-6 text-2xl transition duration-300 border-t border-l first:border-l-0 border-black stroke-slate-500 text-neutral-800">
                 <div className="w-20 h-20 mx-auto">
                     <img
@@ -60,7 +67,7 @@ const CardItemComponent = ({ data, refetch }) => {
                         <button
                             className="  p-2 rounded-sm border-r border-black text-lg font-bold"
                             onClick={() =>
-                                productQuantity > 0 &&
+                                productQuantity > 1 &&
                                 setProductQuantity(productQuantity - 1)
                             }>
                             -
@@ -70,8 +77,15 @@ const CardItemComponent = ({ data, refetch }) => {
                         </span>
 
                         <button
+                            title={`${
+                                cardItemFind?.itemQuantity >= productQuantity ||
+                                cardItemFind?.itemQuantity === 0
+                                    ? ''
+                                    : 'Out Of Stock'
+                            }`}
                             className="  p-2 rounded-sm border-l border-black text-lg font-bold"
                             onClick={() =>
+                                cardItemFind?.itemQuantity >= productQuantity &&
                                 setProductQuantity(productQuantity + 1)
                             }>
                             +

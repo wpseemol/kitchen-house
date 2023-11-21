@@ -14,9 +14,9 @@ const useCardItems = () => {
 
     const { data: cardData = [], refetch } = useQuery({
         queryKey: ['card-items'],
-        enabled: false,
+        enabled: !isUser,
         queryFn: async () => {
-            const response = await axiosBasUrl.get(`/card-data/`);
+            const response = await axiosBasUrl.get('/card-data');
 
             return response.data;
         },

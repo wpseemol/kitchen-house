@@ -11,6 +11,7 @@ import ErrorPage from '../pages/error/ErrorPage';
 import FoodItems from '../pages/foodItems/FoodItems';
 import SingleItem from '../pages/singleItem/SingleItem';
 import CardItem from '../pages/cardItem/CardItem';
+import EditItem from '../pages/editItem/EditItem';
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
                 element: (
                     <PrivetRoute>
                         <UploadItem />
+                    </PrivetRoute>
+                ),
+            },
+            {
+                path: '/upload-item/:id',
+                element: (
+                    <PrivetRoute>
+                        <EditItem />
                     </PrivetRoute>
                 ),
             },

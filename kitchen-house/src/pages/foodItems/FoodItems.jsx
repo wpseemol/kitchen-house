@@ -11,27 +11,12 @@ import { Helmet } from 'react-helmet-async';
 import PageLoading from '../../components/pageLoading/PageLoading';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import useAllFoodItem from '../../hooks/useAllFoodItem/useAllFoodItem';
 
 const FoodItems = () => {
     const [gridCol, setGridCol] = useState('grid');
-    const axiosBasUrl = useAxiosBasUrl();
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['food-items'],
-        queryFn: async () => {
-            try {
-                const response = await axiosBasUrl.get('/food-items');
-                return response.data;
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error,
-                    icon: 'error',
-                    confirmButtonText: 'Cool',
-                });
-            }
-        },
-    });
+    const { data, isLoading } = useAllFoodItem();
 
     if (isLoading) {
         return <PageLoading />;

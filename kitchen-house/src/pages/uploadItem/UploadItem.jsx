@@ -7,25 +7,34 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../providers/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useCategoryData from '../../hooks/useCategoryData/useCategoryData';
 
 const UploadItem = () => {
     const axiosBasUrl = useAxiosBasUrl();
     const loginRegInfo = useContext(AuthContext);
     const { user } = loginRegInfo || {};
 
+    const { uniqCategory, allItemRefetch } = useCategoryData();
+
     const [catAdd, setCatAdd] = useState(false);
 
     const [selectedCatOption, setSelectedCatOption] = useState('');
     const [isCategorySelected, setIsCategorySelected] = useState(false);
-    const [itmeImageCounter, setItmeImageCounter] = useState(2);
+    const [itemImageCounter, setItemImageCounter] = useState(2);
     const [imageAddCounter, setImageAddCounter] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
-    const hendelRemoveImage = (rmItem) => {
-        const finterAfterRemove = imageAddCounter?.filter(
+
+    console.log(imageUrls);
+
+    const handelRemoveImage = (rmItem) => {
+        const finderAfterRemove = imageAddCounter?.filter(
             (item) => item !== rmItem
         );
-        setImageAddCounter(finterAfterRemove);
-        const { [rmItem]: _, ...rest } = imageUrls;
+        setImageAddCounter(finderAfterRemove);
+        const {
+            [rmItem]: {},
+            ...rest
+        } = imageUrls;
         setImageUrls(rest);
     };
 
@@ -99,6 +108,7 @@ const UploadItem = () => {
                         confirmButtonText: 'Okay',
                     });
                     form.reset();
+                    allItemRefetch();
                 })
                 .catch(function (error) {
                     Swal.fire({
@@ -194,7 +204,7 @@ const UploadItem = () => {
                                 </div>
                             </div>
 
-                            {/* itme picture start */}
+                            {/* item picture start */}
                             <div className="relative sm:w-[22rem] mb-4 flex items-center gap-5 group">
                                 <input
                                     required
@@ -207,10 +217,10 @@ const UploadItem = () => {
                                 />
                                 <div
                                     onClick={() => {
-                                        setItmeImageCounter(
-                                            itmeImageCounter + 1
+                                        setItemImageCounter(
+                                            itemImageCounter + 1
                                         );
-                                        const newItem = `url${itmeImageCounter}`;
+                                        const newItem = `url${itemImageCounter}`;
                                         setImageAddCounter([
                                             ...imageAddCounter,
                                             newItem,
@@ -250,7 +260,7 @@ const UploadItem = () => {
                                         />
                                         <div
                                             onClick={() => {
-                                                hendelRemoveImage(item);
+                                                handelRemoveImage(item);
                                             }}
                                             className="text-4xl "
                                             title="Remove">
@@ -271,7 +281,7 @@ const UploadItem = () => {
                                 );
                             })}
                             {/* image add button click input create */}
-                            {/* itme picture end */}
+                            {/* item picture end */}
 
                             {/* this is Category section */}
 
@@ -287,15 +297,15 @@ const UploadItem = () => {
                                             <option value="">
                                                 No category select
                                             </option>
-                                            <option value="option1">
-                                                Category 1
-                                            </option>
-                                            <option value="option2">
-                                                Option 2
-                                            </option>
-                                            <option value="option3">
-                                                Occasion
-                                            </option>
+                                            {uniqCategory?.map((category) => {
+                                                return (
+                                                    <option
+                                                        key={category?.catId}
+                                                        value="">
+                                                        {category?.catName}
+                                                    </option>
+                                                );
+                                            })}
                                         </select>
                                         <div
                                             onClick={() => {
