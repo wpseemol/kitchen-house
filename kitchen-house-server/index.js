@@ -18,8 +18,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-const secret =
-    '778837f8f69f6d693bd2369630198e38b3e92ce6d3871fcad05286cf4b8a83187fec4173d3400a81d53277f915e75e08dbea65a972ddb53f779988d21961874f';
+const secret = process.env.SECRET;
 
 const verifyToken = async (request, response, next) => {
     const token = request.cookies['access-token'];
@@ -89,7 +88,7 @@ async function run() {
             response.send(result);
         });
         //cardItem get
-        app.get('/card-data/', verifyToken, async (request, response) => {
+        app.get('/card-data', verifyToken, async (request, response) => {
             const email = request?.user?.email;
 
             const query = {
