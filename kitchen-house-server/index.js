@@ -9,7 +9,10 @@ require('dotenv').config();
 
 // Allow requests from 'http://localhost:5173'
 const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: [
+        'https://kitchen-house-7ca59.web.app',
+        'https://glittering-souffle-c95d9c.netlify.app/',
+    ],
     credentials: true,
 };
 
@@ -221,6 +224,24 @@ async function run() {
                 response.send(result);
             }
         );
+        //item update
+        app.put('/item/:id', verifyToken, async (request, response) => {
+            const id = request.params.id;
+            const updatedItem = request.body;
+
+            const filter = { _id: new ObjectId(id) };
+            const updateDocument = {
+                $set: updatedItem,
+            };
+
+            const result = await itemsCollection.updateOne(
+                filter,
+                updateDocument
+            );
+
+            response.send(result);
+            console.log('update successful');
+        });
 
         // remove card Item
         app.delete('/card-item-remove/:id', async (request, response) => {
