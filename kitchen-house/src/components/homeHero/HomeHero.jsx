@@ -59,15 +59,17 @@ export default function HomeHero() {
                                     <div>
                                         <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
                                             {' '}
-                                            Best Ever Food{' '}
+                                            Over All Good Taste
                                         </h2>
                                     </div>
                                     <div data-aos="fade-up">
                                         <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
                                             <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
+                                                Ut neque turpis, laoreet quis
+                                                porttitor eu, scelerisque
+                                                pellentesque
+                                                <br />
+                                                nec felis sagittis dui a.
                                             </p>
                                         </div>
                                         <div className="w-fit mx-auto">
@@ -92,15 +94,16 @@ export default function HomeHero() {
                                     <div>
                                         <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
                                             {' '}
-                                            Best Ever Food{' '}
+                                            Best Ever Food Service
                                         </h2>
                                     </div>
                                     <div data-aos="fade-up">
                                         <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
                                             <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
+                                                Quisque odio lectus, consequat
+                                                id erat ut, consectetur
+                                                convallis tortor <br />
+                                                Nunc non tortor sed mi bibendum.
                                             </p>
                                         </div>
                                         <div className="w-fit mx-auto">
@@ -124,15 +127,16 @@ export default function HomeHero() {
                                     <div>
                                         <h2 className="lg:text-7xl md:text-5xl text-3xl font-bold">
                                             {' '}
-                                            Best Ever Food{' '}
+                                            We Serve Quality Food{' '}
                                         </h2>
                                     </div>
                                     <div data-aos="fade-up">
                                         <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
                                             <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
+                                                Maecenas posuere dolor sit amet,
+                                                consectetur adipiscing elit
+                                                <br />
+                                                Turpis ridiculus tellus.
                                             </p>
                                         </div>
                                         <div className="w-fit mx-auto">
@@ -163,9 +167,10 @@ export default function HomeHero() {
                                     <div data-aos="fade-up">
                                         <div className="lg:text-2xl md:text-xl text-base font-medium lg:my-8 md:my-4 my-2">
                                             <p>
-                                                Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit.
-                                                Architecto, asperiores.
+                                                Maecenas posuere dolor sit amet,
+                                                consectetur adipiscing elit
+                                                <br />
+                                                Turpis ridiculus tellus.
                                             </p>
                                         </div>
                                         <div className="w-fit mx-auto">

@@ -12,6 +12,7 @@ import FoodItems from '../pages/foodItems/FoodItems';
 import SingleItem from '../pages/singleItem/SingleItem';
 import CardItem from '../pages/cardItem/CardItem';
 import EditItem from '../pages/editItem/EditItem';
+import BlogPage from '../pages/blogPage/BlogPage';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: '/food-items',
                 element: <FoodItems />,
+            },
+            {
+                path: '/blog',
+                element: <BlogPage />,
             },
             {
                 path: '/food-items/:product',

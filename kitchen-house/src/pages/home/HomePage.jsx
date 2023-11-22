@@ -28,7 +28,7 @@ const HomePage = () => {
             </section>
 
             {/* pre-Order Section */}
-            <section>
+            <section id="pre-order">
                 <PreOrder />
             </section>
 

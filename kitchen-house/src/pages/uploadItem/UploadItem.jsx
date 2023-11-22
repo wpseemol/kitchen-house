@@ -24,8 +24,6 @@ const UploadItem = () => {
     const [imageAddCounter, setImageAddCounter] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
 
-    console.log(imageUrls);
-
     const handelRemoveImage = (rmItem) => {
         const finderAfterRemove = imageAddCounter?.filter(
             (item) => item !== rmItem
@@ -294,7 +292,7 @@ const UploadItem = () => {
                                             id="occasion"
                                             value={selectedCatOption}
                                             onChange={handleSelectChange}>
-                                            <option value="">
+                                            <option value="" disabled>
                                                 No category select
                                             </option>
                                             {uniqCategory?.map((category) => {

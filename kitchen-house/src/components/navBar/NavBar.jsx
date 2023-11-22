@@ -92,17 +92,11 @@ const NavBar = () => {
             </li>
 
             <li className="border-y border-white/10 lg:py-0 py-5">
-                <NavLink
-                    to="/about-us"
-                    className={({ isActive, isPending }) =>
-                        isPending
-                            ? 'pending'
-                            : isActive
-                            ? 'active'
-                            : 'hover:active pl-7 lg:pl-0 py-3 lg:py-0'
-                    }>
-                    About Us
-                </NavLink>
+                <a
+                    href="/#pre-order"
+                    className="hover:active pl-7 lg:pl-0 py-3 lg:py-0">
+                    Pre Order
+                </a>
             </li>
         </>
     );

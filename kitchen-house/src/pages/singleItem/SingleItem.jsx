@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAxiosBasUrl from '../../hooks/useAxiosBasUrl';
-import { useQuery } from '@tanstack/react-query';
+
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs';
 import { IoMdAdd, IoMdClose } from 'react-icons/io';
 import { AiOutlineEdit, AiOutlineMinus } from 'react-icons/ai';
@@ -15,6 +15,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import useCardItems from '../../hooks/useCardItems/useCardItems';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import useSingleItem from '../../hooks/useSingleItem/useSingleItem';
 
 const SingleItem = () => {
     const { product: productId } = useParams();
@@ -46,27 +47,10 @@ const SingleItem = () => {
         return item.cardItemResult._id;
     });
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['item'],
-        queryFn: async () => {
-            try {
-                const response = await axiosBasUrl.get(
-                    `/food-items/${productId}`
-                );
-                return response.data;
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: error,
-                    icon: 'error',
-                    confirmButtonText: 'Cool',
-                });
-            }
-        },
-    });
+    const { singleItem, isLoading } = useSingleItem(productId);
 
     const cardItemId = cardData.find((item) => {
-        return item?.cardItemResult?._id === data?._id;
+        return item?.cardItemResult?._id === singleItem?._id;
     });
 
     const handelAddCart = () => {
@@ -75,12 +59,12 @@ const SingleItem = () => {
             return;
         }
 
-        if (data?.postBy?.email === user?.email) {
+        if (singleItem?.postBy?.email === user?.email) {
             toast("Item is posted by you, You Can'n Add Card");
             return;
         }
 
-        if (cardDataItemId.includes(data?._id)) {
+        if (cardDataItemId.includes(singleItem?._id)) {
             axiosBasUrl
                 .put(`/card-quantity/${cardItemId?._id}`, {
                     itemQuantity: cardItemId?.itemQuantity + itemCartCount,
@@ -88,8 +72,9 @@ const SingleItem = () => {
                 .then(() => {
                     axiosBasUrl
                         .put(`/quantity/${productId}`, {
-                            itemQuantity: data?.itemQuantity - itemCartCount,
-                            buyCount: data?.buyCount + itemCartCount,
+                            itemQuantity:
+                                singleItem?.itemQuantity - itemCartCount,
+                            buyCount: singleItem?.buyCount + itemCartCount,
                         })
                         .then(() => {
                             refetch();
@@ -119,8 +104,8 @@ const SingleItem = () => {
             .then(function () {
                 axiosBasUrl
                     .put(`/quantity/${productId}`, {
-                        itemQuantity: data?.itemQuantity - itemCartCount,
-                        buyCount: data?.buyCount + itemCartCount,
+                        itemQuantity: singleItem?.itemQuantity - itemCartCount,
+                        buyCount: singleItem?.buyCount + itemCartCount,
                     })
                     .then(() => {
                         Swal.fire({
@@ -148,7 +133,7 @@ const SingleItem = () => {
         return <PageLoading />;
     }
 
-    const imageUralObj = data?.itemImage || {};
+    const imageUralObj = singleItem?.itemImage || {};
     const itemImageArr = Object.entries(imageUralObj).map(([key, value]) => ({
         [key]: value,
     }));
@@ -156,7 +141,7 @@ const SingleItem = () => {
     return (
         <>
             <Helmet>
-                <title>Kitchen House | {data?.itemName}</title>
+                <title>Kitchen House | {singleItem?.itemName}</title>
             </Helmet>
             <div className="sm:py-16 py-8 sm:pb-24 pb-12 container mx-auto ">
                 <div className="">
@@ -171,13 +156,15 @@ const SingleItem = () => {
                                 }>
                                 <figure
                                     onClick={() => {
-                                        setPreviewImage(data?.itemImage?.url1);
+                                        setPreviewImage(
+                                            singleItem?.itemImage?.url1
+                                        );
                                         setImgPreviewWindow(true);
                                     }}
                                     className="h-full">
                                     <img
-                                        src={data?.itemImage?.url1}
-                                        alt={data?.itemName}
+                                        src={singleItem?.itemImage?.url1}
+                                        alt={singleItem?.itemName}
                                         className="h-full w-full object-cover object-center"
                                     />
                                 </figure>
@@ -212,7 +199,9 @@ const SingleItem = () => {
                                                                     }`
                                                                 ]
                                                             }
-                                                            alt={data?.itemName}
+                                                            alt={
+                                                                singleItem?.itemName
+                                                            }
                                                             className="h-full w-full object-cover object-center"
                                                         />
                                                     </figure>
@@ -232,7 +221,7 @@ const SingleItem = () => {
                                     <figure className=" md:h-[34rem]  relative">
                                         <img
                                             src={previewImage}
-                                            alt={data?.itemName}
+                                            alt={singleItem?.itemName}
                                             className="w-full h-full object-cover object-center"
                                         />
                                         <div className="absolute -top-2 -right-2">
@@ -251,19 +240,20 @@ const SingleItem = () => {
                         <div className="">
                             <div>
                                 <h2 className="text-4xl font-bold">
-                                    {data?.itemName}
+                                    {singleItem?.itemName}
                                 </h2>
                                 <p className="my-3 text-lg font-semibold">
-                                    Category: <span>{data?.itemName}</span>
+                                    Category:{' '}
+                                    <span>{singleItem?.itemName}</span>
                                 </p>
                                 <div className="flex flex-wrap items-center gap-5">
                                     <p className="text-lg">
                                         Price:{' '}
-                                        <span>${data?.itemPrice}.00</span>
+                                        <span>${singleItem?.itemPrice}.00</span>
                                     </p>
                                     <div
                                         className={`${
-                                            data?.itemQuantity <= 0
+                                            singleItem?.itemQuantity <= 0
                                                 ? 'bg-red-500/30'
                                                 : 'bg-primaryColor/30'
                                         } ${
@@ -275,7 +265,7 @@ const SingleItem = () => {
                                             Status:{' '}
                                             <span>
                                                 {' '}
-                                                {data?.itemQuantity <= 0
+                                                {singleItem?.itemQuantity <= 0
                                                     ? 'Out Of Stock'
                                                     : 'In Stock'}
                                             </span>
@@ -283,10 +273,12 @@ const SingleItem = () => {
                                     </div>
                                 </div>
                                 <p className="my-3 text-lg">
-                                    Author: <span>{data?.postBy?.name}</span>
+                                    Author:{' '}
+                                    <span>{singleItem?.postBy?.name}</span>
                                 </p>
                                 <p className=" text-lg">
-                                    Post Time: <span>{data?.postTime}</span>
+                                    Post Time:{' '}
+                                    <span>{singleItem?.postTime}</span>
                                 </p>
                             </div>
                             <div className="flex items-center mt-6 border w-fit">
@@ -304,13 +296,14 @@ const SingleItem = () => {
                                 <div className="w-16">
                                     <input
                                         disabled={
-                                            data?.itemQuantity <= itemCartCount
+                                            singleItem?.itemQuantity <=
+                                            itemCartCount
                                         }
                                         onChange={(e) => {
-                                            data?.itemQuantity <=
+                                            singleItem?.itemQuantity <=
                                             parseInt(e.target.value)
                                                 ? setItemCartCount(
-                                                      data?.itemQuantity
+                                                      singleItem?.itemQuantity
                                                   )
                                                 : isNaN(
                                                       parseInt(e.target.value)
@@ -330,7 +323,8 @@ const SingleItem = () => {
                                 <div>
                                     <button
                                         disabled={
-                                            data?.itemQuantity <= itemCartCount
+                                            singleItem?.itemQuantity <=
+                                            itemCartCount
                                         }
                                         onClick={() => {
                                             setItemCartCount(itemCartCount + 1);
@@ -344,12 +338,12 @@ const SingleItem = () => {
                                 {' '}
                                 <div
                                     title={
-                                        data?.itemQuantity <= 0
+                                        singleItem?.itemQuantity <= 0
                                             ? 'Item Out Of Stock'
                                             : ''
                                     }
                                     onClick={() =>
-                                        data?.itemQuantity <= 0
+                                        singleItem?.itemQuantity <= 0
                                             ? setOutStock(true)
                                             : handelAddCart()
                                     }>
@@ -393,7 +387,9 @@ const SingleItem = () => {
                                 </TabList>
 
                                 <TabPanel>
-                                    <p className="">{data?.description}</p>
+                                    <p className="">
+                                        {singleItem?.description}
+                                    </p>
                                 </TabPanel>
                                 <TabPanel>
                                     <h2>Coming soon</h2>
