@@ -1,3 +1,7 @@
-[Sir Please giveme some time for completed this project]
+-   [Kitchen-House life site](https://kitchen-house-7ca59.web.app)
 
--   [Kitchen-House life site](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+-   first of all,when first click add card button item reference edited on card but next time click increase quantity this Item.
+-   responsive mobile view animated design.
+-   homepage have top section.it shows using the selling count
+-   upload page and update page have in a image preview on hover
+-   item button show when hover item button is visible
