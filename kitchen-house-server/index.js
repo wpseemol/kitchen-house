@@ -3,21 +3,29 @@ const cors = require('cors');
 const app = express();
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 const port = process.env.PORT || 5000;
 
-require('dotenv').config();
-
-// Allow requests from 'http://localhost:5173'
-const corsOptions = {
-    origin: [
-        'https://kitchen-house-7ca59.web.app',
-        'https://glittering-souffle-c95d9c.netlify.app/',
-    ],
-    credentials: true,
-};
+// Allow requests
+// const corsOptions = {
+//     origin: [
+//         'http://localhost:5173',
+//         'https://kitchen-house-7ca59.web.app',
+//         'https://glittering-souffle-c95d9c.netlify.app',
+//     ],
+//     credentials: true,
+// };
 
 // middlewares
-app.use(cors(corsOptions));
+app.use(
+    cors({
+        origin: [
+            'http://localhost:5173',
+            'https://kitchen-house-7ca59.web.app',
+        ],
+        credentials: true,
+    })
+);
 app.use(express.json());
 app.use(cookieParser());
 
