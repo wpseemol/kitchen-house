@@ -1,4 +1,4 @@
--   [Kitchen-House life site](https://kitchen-house-7ca59.web.app)
+-   [Kitchen-House life site](https://capable-faloodeh-7aef99.netlify.app)
 
 -   first of all,when first click add card button item reference edited on card but next time click increase quantity this Item.
 -   responsive mobile view animated design.
