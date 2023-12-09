@@ -5,7 +5,7 @@ demo:
 
 <div align="center">
    
-   <img src="https://github.com/wpseemol/kitchenHouse/blob/main/demo/kithcenHouse%20debo.png?raw=true" width="100%" alt="ContestHub">
+   <img src="https://github.com/wpseemol/kitchen-house/blob/main/demo/kithcenHouse%20debo.png?raw=true" width="100%" alt="ContestHub">
 
  </div>
 
