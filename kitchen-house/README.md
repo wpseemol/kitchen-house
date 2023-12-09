@@ -4,4 +4,4 @@
 -   responsive mobile view animated design.
 -   homepage have top section.it shows using the selling count
 -   upload page and update page have in a image preview on hover
--   item button show when hover item button is visible
+-   item button show when hover item button is visible.
