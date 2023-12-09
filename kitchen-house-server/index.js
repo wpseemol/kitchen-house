@@ -6,15 +6,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 
-// Allow requests
-// const corsOptions = {
-//     origin: [
-//         'http://localhost:5173',
-//         'https://kitchen-house-7ca59.web.app',
-//         'https://glittering-souffle-c95d9c.netlify.app',
-//     ],
-//     credentials: true,
-// };
+
 
 // middlewares
 app.use(
